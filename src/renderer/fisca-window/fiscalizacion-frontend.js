@@ -23,12 +23,3 @@ function operacion(arancel, area, construccion, obrasComp, rustico = true){
   }
   
 }
-
-/*
-const newTemplate = `
-    <div class="pane">
-          <h2>${usuario.nombre_completo}</h2>
-    </div>
-        `;
-destino.innerHTML += newTemplate;
-*/
