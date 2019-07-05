@@ -22,6 +22,22 @@ function createMenu () {
       label: 'RENTAS',
       submenu: [
         {
+          label:'Departamento',
+          click(){openWindow(595,455,'Departamento',true,'departamento')}
+        },
+        {
+          label:'Provincia',
+          click(){openWindow(595,455,'Provincia',true,'provincia')}
+        },
+        {
+          label:'Distrito',
+          click(){openWindow(745,530,'Distrito',true,'distrito')}
+        },
+        {
+          label:'Urbanisacion',
+          click(){openWindow(745,530,'Urbanisacion',true,'urbanisacion')}
+        },
+        {
           label: 'Contribuyente',
           accelerator: 'CmdOrCtrl+T',
           click () { openWindow(600, 500, 'Contribuyente', true, 'contribuyente') }
@@ -34,7 +50,7 @@ function createMenu () {
         {
           label: 'Acta',
           accelerator: 'CmdOrCtrl+F',
-          click () { openWindow(540, 600,'Fiscalizacion', true, 'fiscalizacion') } //openWindow(ancho, alto, titulo, center = true, plantilla)
+          click () { openWindow(500, 600,'Fiscalizacion', true, 'fiscalizacion') } //openWindow(ancho, alto, titulo, center = true, plantilla)
         },
         {
           label: 'Otra opcion'

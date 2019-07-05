@@ -49,26 +49,26 @@ function limpiarInputs(elementoPadre, tipo){
   inputs[0].focus()
 }
 
-function validateForm(e){
-    var elements = e.elements;
-    for(var i = 0; i < elements.length; i++) {
-        if(elements[i].type === "text"){
-            if(elements[i].value.trim() === "" && elements[i].required === true) {
-                //var title = elements[i].getAttribute('title');
-                alert("Please fill the " + ' ingrese ' + " field");
-                elements[i].focus();
-                elements[i].style.borderColor = "red";
-                elements[i].style.borderStyle = "dashed";
-                return false;
-            }
-        }
-    }
+function pasarFocus(container){
+  const elemento = document.getElementById(container)
+  let inputs = elemento.querySelectorAll(".form-control")
+  alert(inputs.length)
+  /*for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'text'){
+      inputs[i].addEventListener('keydown', inputCharacters);
+    } 
+  }*/
 }
+// function inputCharacters(event) {
+//   if (event.keyCode == 13) {
+//     document.getElementById('inputSecond').focus();
+//   }
+// }
 
 module.exports = {
     crearFila,
     showDialog,
     operacion,
     limpiarInputs,
-    validateForm
+    pasarFocus
 }
