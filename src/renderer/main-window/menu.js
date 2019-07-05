@@ -34,7 +34,7 @@ function createMenu () {
         {
           label: 'Acta',
           accelerator: 'CmdOrCtrl+F',
-          click () { openWindow(600, 600,'Fiscalizacion', true, 'fiscalizacion') } //openWindow(ancho, alto, titulo, center = true, plantilla)
+          click () { openWindow(540, 600,'Fiscalizacion', true, 'fiscalizacion') } //openWindow(ancho, alto, titulo, center = true, plantilla)
         },
         {
           label: 'Otra opcion'
