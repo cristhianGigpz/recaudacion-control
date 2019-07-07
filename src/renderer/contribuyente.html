@@ -8,26 +8,170 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <script src="./contrib-window/contribuyente-frontend.js" type="text/javascript" charset="utf-8"></script>  
 </head>
-<body>
-<div class="window">
-  <header class="toolbar toolbar-header">
-    <h1 class="title">Contribuyentes</h1>
-  </header>
-  <div class="window-content" id="destino">
-      
-  </div>
-  <footer class="toolbar toolbar-footer">
-    <div class="toolbar-actions">
-      <button id="cancel-button" class="btn btn-default">
-        Cancelar
-      </button>
-
-      <button id="save-button" type="submit" form="preferences-form" class="btn btn-primary pull-right">
-        Guardar
-      </button>
-    </div>
-  </footer>
-</div>
-
+<body class="_bln">
+	<div class="window">
+		<header class="toolbar toolbar-header">
+			<h1 class="title">Contribuyentes</h1>
+		</header>
+		<div class="window-content" id="destino">
+			<div class="container-fluid">
+				<div class="card">
+					<div class="header">
+						<h4>Registro Contribuyente</h4>
+					</div>
+					<div class="content">
+						<form>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>nombre / razon-social</label>
+									<input type="text" class="form-control" placeholder="nombre / razon-social" id="nom">
+								</div>
+								<div class="col-4 space-left">
+									<label>Tipo Documento</label>
+									<div class="list-radio">
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												DNI
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												OTRO DOCUMENTO
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>numero</label>
+									<input type="text" class="form-control" placeholder="Numero" id="numero">
+								</div>
+								<div class="col-4 space-left">
+									<label>Urbanisación</label>
+									<select class="form-control">
+										<option>Option one</option>
+										<option>Option two</option>
+										<option>Option three</option>
+										<option>Option four</option>
+										<option>Option five</option>
+										<option>Option six</option>
+										<option>Option seven</option>
+										<option>Option eight</option>
+									</select>
+								</div>
+								<div class="col-4 space-left">
+									<label>Dirección</label>
+									<input type="text" class="form-control" placeholder="Dirección" id="direccion">
+								</div>
+							</div>
+							<div class="separator">
+								<p>Domicilio</p>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>Tipo Persona</label>
+									<div class="list-radio">
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												JURIDICA
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												NATURAL
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>lote</label>
+									<input type="text" class="form-control" placeholder="lote" id="lote">
+								</div>
+								<div class="col-4 space-left">
+									<label>manzana</label>
+									<input type="text" class="form-control" placeholder="manzana" id="manzana">
+								</div>
+								<div class="col-4 space-left">
+									<label>Departamento</label>
+									<input type="text" class="form-control" placeholder="Departamento" id="Departamento">
+								</div>
+								<div class="col-4 space-left">
+									<label>numero</label>
+									<input type="text" class="form-control" placeholder="numero" id="numero">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>motivo </label>
+									<div class="list-radio">
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												A
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="radios" checked>
+												B
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>total anexo</label>
+									<input type="text" class="form-control" placeholder="total anexo" id="total">
+								</div>
+								<div class="col-4 space-left">
+									<label>estado </label>
+									<div class="list-radio">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> estado
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>impuesto anual</label>
+									<input type="text" class="form-control" placeholder="impuesto anual" id="impuesto">
+								</div>
+								<div class="col-4 space-left">
+									<label>valor total exonerado</label>
+									<input type="text" class="form-control" placeholder="valor total exonerado" id="exonerado">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>valor total predio</label>
+									<input type="text" class="form-control" placeholder="valor total predio" id="predio">
+								</div>
+								<div class="col-4 space-left">
+									<label>base imponible</label>
+									<input type="text" class="form-control" placeholder="base imponible" id="base">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-1 ">
+									<label>observacion</label>
+									<textarea class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="toolbar toolbar-footer">
+			<div class="toolbar-actions">
+				<button id="reg-contribuyente-end" class="btn btn-default">Cancelar</button>
+				<button id="save-button" type="submit" form="preferences-form" class="btn btn-primary pull-right">Guardar</button>
+			</div>
+		</footer>
+	</div>
 </body>
+<!--<script src="./contrib-window/registro-frontend.js" type="text/javascript" charset="utf-8"></script>-->
 </html>

@@ -46,35 +46,41 @@
 body._bln .window{
   background: whitesmoke;
 }
+.container-fluid-list{
+  display: block;
+  width: auto;
+  padding: 1rem 1.5rem;
+}
 .container-fluid{
   display: block;
   width: 100%;
   padding: 1rem 1.5rem;
 }
-.container-fluid .card{
+
+.card{
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 0 0 1px rgba(63,63,68,.1);
   background-color: #fff;
   margin-bottom: 30px;
 }
-.container-fluid .card .header{
+.card .header{
   padding: 15px 15px 0;
   color: #333;
   font-weight: 300;
   font-size: 22px;
 }
-.container-fluid .card .header h4{
+.card .header h4{
   margin: 0;
   color: #333;
   font-weight: 300;
 }
-.container-fluid .card .content{
+.card .content{
   padding: 15px;
 }
-.container-fluid button{
+ button{
   cursor: pointer;
 }
-.container-fluid .card .content form .form-group input{
+.card .content form .form-group input{
   box-sizing: border-box;
   cursor: initial;
   box-shadow: none;
@@ -99,6 +105,44 @@ body._bln .window{
 .col-2{
   width: 47.1%;
   display: inline-block;
+}
+.col-3 {
+  width: 30%;
+  display: inline-block;
+}
+.col-4 {
+  width: 18%;
+  display: inline-block;
+}
+.list-radio .radio{
+  margin: 0;
+  display: inline-block;
+  margin-right: 1rem;
+}
+.list-radio .checkbox{
+  margin: 0;
+}
+.list-radio .radio:last-child{
+  margin-right: 0;
+}
+.separator p{
+  position: relative;
+}
+.separator p::after{
+  content: '';
+  height: 1px;
+  background: #dcd3d3;
+  position: absolute;
+  top: 9px;
+  left: 63px;
+  right: 26px
+}
+.btn.btn-default{
+  cursor: pointer;
+}
+.float-left{
+  display: inline-block;
+  margin-right: 1rem;
 }
 @media print {
   header, footer, div.sidebar {

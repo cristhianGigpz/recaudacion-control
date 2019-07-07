@@ -1,19 +1,22 @@
-import { remote, ipcRenderer } from 'electron'
-import settings from 'electron-settings'
-import crypto from 'crypto'
-
-const { Client, Pool } = require('pg')
-require('custom-env').env('config')
+import { remote, ipcRenderer } from 'electron';
+import settings from 'electron-settings';
+import crypto from 'crypto';
+//import { openWindow } from './main-window/ipcRendererEvents'
+import UI from './main-window/ui'
+const ui = new UI();
+const { Client, Pool } = require('pg');
+require('custom-env').env('config');
 
 let usuario = {};
 
 
 window.addEventListener('load', () => {
-  cancelButton()
-  //saveButton()
-  testConnection()
-  muestraUsuario()
-  
+ // cancelButton();
+  //saveButton();
+  testConnection();
+  muestraUsuario();
+  btnRegistro();
+  closeRegistroContribuyente();
 })
 
 async function testConnection(){
@@ -51,25 +54,24 @@ function muestraUsuario(){
   //const mainWindow = remote.getGlobal('win')
       const destino = document.querySelector('#destino')
       //conectado//
-      ipcRenderer.on('conectado', (event, usuario)=>{
-        console.log(usuario)
+      //ipcRenderer.on('conectado', (event, usuario)=>{
+       // console.log(usuario)
         //let newUser = JSON.stringify(usuario)
-        const newTemplate = `
+        /*const newTemplate = `
           <div class="pane">
             <h2>${usuario.nombre_completo}</h2>
           </div>
         `;
         destino.innerHTML += newTemplate;
-      })
+      })*/
 }
-
-function cancelButton () {
-  const cancelButton = document.getElementById('cancel-button')
-
-  cancelButton.addEventListener('click', () => {
-    const prefsWindow = remote.getCurrentWindow()
-    prefsWindow.close()
-  })
+const btnRegistro=()=>{
+  ui.openWindows('btn-add',1230,610,'Contribuyente', 'contribuyente');
+}
+const closeRegistroContribuyente=()=>{
+  ui.closeFrom('reg-contribuyente-end');
+  ui.closeFrom('btn-close');
+  
 }
 
 function saveButton () {

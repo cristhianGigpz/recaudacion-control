@@ -40,7 +40,7 @@ function createMenu () {
         {
           label: 'Contribuyente',
           accelerator: 'CmdOrCtrl+T',
-          click () { openWindow(600, 500, 'Contribuyente', true, 'contribuyente') }
+          click () { openWindow(1230, 610, 'Contribuyente', true, 'listadoContribuyente') }
         }
       ]
     },
