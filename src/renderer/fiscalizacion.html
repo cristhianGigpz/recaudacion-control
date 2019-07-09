@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fiscalizacion</title>
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="../assets/css/photon.min.css">
   <link rel="stylesheet" href="../assets/css/main.css">
   
-  <script src="./fisca-window/fiscalizacion-frontend.js" type="text/javascript" charset="utf-8"></script>
+  
   <!-- <script src="../assets/bootstrap/js/bootstrap.min.js"></script> -->
 </head>
 <body>
@@ -33,46 +33,67 @@
           <button class="btn btn-default">
             <span class="icon icon-shuffle"></span>
           </button>
+          <button class="btn btn-default" id="cancel-button" title="Salir">
+            <span class="icon icon-export"></span>
+          </button>
         </div>    
     </header>
     <div class="window-content">
         <div class="padded-more">
-          <form class="form-inline">
-              <div class="form-row">
-                  <div class="col">
-                    <input type="text" class="form-control" placeholder="Arancel 0">
-                  </div>
-                  <div class="col">
-                    <input type="text" class="form-control" placeholder="Area 0.0000">
-                  </div>
-                  <div class="col">
-                      <input type="text" class="form-control" placeholder="Construccion S/.">
-                  </div>
-                  <div class="col">
-                      <input type="text" class="form-control" placeholder="Obra Complementaria S/.">
-                  </div>
-                  <div class="col">
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" name="rdTipo-predio" id="radio-rustico" value="option1" checked>
-                          <label class="form-check-label" for="radio-rustico">
-                            Rustico (50%)
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="rdTipo-predio" id="radio-urbano" value="option2">
-                          <label class="form-check-label" for="radio-urbano">
-                               Urbano
-                          </label>
-                        </div>
-                  </div>
-              </div>
-            <button type="button" id="" class="btn btn-default">Agregar</button>
-            <button type="button" id="cancel-button" class="btn btn-primary mb-2">Cerrar</button>
+          <form id="frmAgregar" name="frmAgregar">
+            <div class="form-group">
+              <label>Arancel</label>
+              <input type="text" id="txtArancel" class="form-control" placeholder="Arancel 0" required>
+            </div>
+            <div class="form-group">
+              <label>Área</label>
+              <input type="text" id="txtArea" class="form-control" placeholder="Area 0.0000" required>
+            </div>
+            <div class="form-group">
+              <label>Construccion</label>
+              <input type="text" id="txtConst" class="form-control" placeholder="Construccion S/." required>
+            </div>
+            <div class="form-group">
+              <label>Obra Complementaria</label>
+              <input type="text" id="txtOcompl" class="form-control" placeholder="Obra Complementaria S/." required>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radiosTerreno" checked value="rustico">
+                Rustico
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radiosTerreno" value="urbano">
+                Urbano
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="" id="btnAgregar" class="btn btn-form btn-primary">Agregar</button>
+            </div>
           </form>
+
+          <table class="table-striped" class="my-table">
+            <thead>
+              <caption id="totTabla">Total</caption>
+              <tr>
+                <th>Arancel</th>
+                <th>Area</th>
+                <th>Construccion</th>
+                <th>Complementaria</th>
+                <th>Tipo</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="destinoFila">
+              
+            </tbody>
+          </table>
 
         </div>            
       </div>   
     </div>
-
+    <script src="./fisca-window/fiscalizacion-frontend.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

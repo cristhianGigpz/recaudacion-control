@@ -27,10 +27,10 @@ app.on('ready', () => {
     global.win = new BrowserWindow({
     width: 800,
     height: 600,
-    fullscreen: false,
+    fullscreen: true,
     title: 'Sistema Integrado de Rentas',
     center: true,
-    maximizable: false,
+    //maximizable: false,
     show: false,
     webPreferences: {
       nodeIntegration: true
