@@ -1,11 +1,11 @@
-const { ipcMain, dialog } = require('electron')
-import fs from 'fs'
-import isImage from 'is-image'
-import filesize from 'filesize'
-import path from 'path'
+const { ipcMain, dialog, shell,BrowserWindow } = require('electron');
+import os from 'os';
+import fs from 'fs';
+import isImage from 'is-image';
+import filesize from 'filesize';
+import path from 'path';
 
 function setMainIpc(win) {
-
   ipcMain.on('connection', (event, usuario)=>{
     console.log(usuario)
     //win.webContents.send('conectado', usuario)// Envia a su render (main.html)
@@ -14,6 +14,26 @@ function setMainIpc(win) {
     event.sender.send('conectado', usuario) //Envia respuesta al ipcRender que envio el evento (contribuyente-frontend.js)
   })
 
+  ipcMain.on('print-to-pdf',(event)=>{
+    const pdfPath = path.join(os.tmpdir(),'print.pdf');
+    const win =BrowserWindow.fromWebContents(event.sender);
+    const data ='ESTE ES MI PRIMER REPORTE';
+    fs.writeFile(pdfPath,data,(error)=>{
+      if(error) return console.log(error.message);
+      shell.openExternal('file://'+pdfPath);
+      event.sender.send('wrote-pdf',pdfPath);
+      //event.sender.send('wrote-pdf','pdf print');
+    })
+   /* win.webContents.printToPDF({},(err,data)=>{
+      if(err) return console.log(err.message);
+
+      fs.writeFile(pdfPath,data,(error)=>{
+        if(error) return console.log(error.message);
+        shell.openExternal('file://'+pdfPath);
+        event.sender.send('wrote-pdf',pdfPath);
+      })
+    })*/
+  })
 
   ipcMain.on('open-directory', (event)=>{
     dialog.showOpenDialog(win, {

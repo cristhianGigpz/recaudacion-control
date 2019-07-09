@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     NewDdata();
     SaveButton();
     LoadData();
+    printPDF();
 });
 
 /**
@@ -24,12 +25,44 @@ const SaveButton =()=>{
     document.getElementById('btn-guardar').addEventListener('click',(e)=>{
         e.preventDefault();
         const _name = document.getElementById('dep').value;
-        const element = ui.insertData('INSERT INTO departamento(nombre_departamento) VALUES($1) RETURNING *',[_name],'departamento');
+        const element = ui.insertData('INSERT INTO departamento(nombre_departamento) VALUES($1);',[_name],'departamento');
         element.then((e)=>{LoaderData(e)})
-        document.getElementById('dep').value='';
     })
 }
-
+const printPDF =()=>{
+    const  btnPrint = document.getElementById('print-pdf');
+    btnPrint.addEventListener('click',(event)=>{
+       // ui.pdfPrint();
+       const invoice = {
+        shipping: {
+          name: "John Doe",
+          address: "1234 Main Street",
+          city: "San Francisco",
+          state: "CA",
+          country: "US",
+          postal_code: 94111
+        },
+        items: [
+          {
+            item: "TC 100",
+            description: "Toner Cartridge",
+            quantity: 2,
+            amount: 6000
+          },
+          {
+            item: "USB_EXT",
+            description: "USB Cable Extender",
+            quantity: 1,
+            amount: 2000
+          }
+        ],
+        subtotal: 8000,
+        paid: 0,
+        invoice_nr: 1234
+      };
+       ui.createInvoice(invoice,'reportePDF')
+    })
+}
 /*
 const EditButton =()=>{
     document.getElementById('edit').addEventListener('click',(e)=>{

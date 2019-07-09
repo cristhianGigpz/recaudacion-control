@@ -43,7 +43,7 @@ app.on('ready', () => {
   })
 
   setMainIpc(global.win)
-  handleErrors(global.win)
+  //handleErrors(global.win)
   
 
   global.win.once('ready-to-show', () => {
