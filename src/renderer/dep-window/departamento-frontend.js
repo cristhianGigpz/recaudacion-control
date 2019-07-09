@@ -60,7 +60,7 @@ const printPDF =()=>{
         paid: 0,
         invoice_nr: 1234
       };
-       ui.createInvoice(invoice,'reportePDF')
+       ui.createInvoice(invoice,'reportePDF.pdf')
     })
 }
 /*
