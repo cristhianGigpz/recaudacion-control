@@ -12,7 +12,7 @@ function operacion(arancel, area, construccion, obrasComp, terreno = 'rustico'){
       resultado = ((parseFloat(arancel) * parseFloat(area)) + (parseFloat(construccion) + parseFloat(obrasComp)))
       resultado = resultado.toFixed(2)
     }
-    totFinal+=parseInt(resultado)
+    totFinal+=parseFloat(resultado)
     crearFila(arancel, area, construccion, obrasComp, terreno, resultado)
     //alert(resultado)
     totgeneral.innerHTML = totFinal.toFixed(2)
