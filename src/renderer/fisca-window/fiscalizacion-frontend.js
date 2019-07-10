@@ -35,14 +35,6 @@ for (let i = 0; i < formatNum.length; i++) {
   })
 }
 
-/* number.addEventListener('keyup', (e) => {
-	const element = e.target;
-	const value = element.value;
-  element.value = formatNumber(value);
-}); */
-
-
-
 document.getElementById('btnAgregar').addEventListener('click', function(event){
   //showDialog('info', 'Aviso', 'Se ha agregado el registro')
   let data = []

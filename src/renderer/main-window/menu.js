@@ -1,5 +1,5 @@
 import { remote } from 'electron'
-import { openDirectory, saveFile, openWindow, uploadImage, pasteImage } from './ipcRendererEvents'
+import { openDirectory, saveFile, openWindow, openContribuyente, uploadImage, pasteImage } from './ipcRendererEvents'
 //import { print } from './images-ui'
 
 function createMenu () {
@@ -53,8 +53,8 @@ function createMenu () {
           click () { openWindow(580, 600,'Fiscalizacion', true, 'fiscalizacion') } //openWindow(ancho, alto, titulo, center = true, plantilla)
         },
         {
-          label: 'Otra opcion'
-          //click () { pasteImage() }
+          label: 'Otra opcion',
+          click () { openContribuyente() }
         }
       ]
     },

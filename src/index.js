@@ -8,6 +8,7 @@ import os from 'os'
 import path from 'path'
 
 
+
 if (process.env.NODE_ENV === 'development') {
   devtools()
   require('electron-reload')
@@ -25,12 +26,12 @@ app.on('ready', () => {
 
   // creando una ventana
     global.win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     fullscreen: false,
     title: 'Sistema Integrado de Rentas',
     center: true,
-    //maximizable: false,
+    maximizable: true,
     show: false,
     webPreferences: {
       nodeIntegration: true
@@ -44,7 +45,7 @@ app.on('ready', () => {
 
   setMainIpc(global.win)
   //handleErrors(global.win)
-  
+
 
   global.win.once('ready-to-show', () => {
     global.win.show()
@@ -58,6 +59,7 @@ app.on('ready', () => {
   global.win.on('closed', () => {
     global.win = null
     app.quit()
+
   })
 
   let icon
@@ -79,3 +81,6 @@ app.on('ready', () => {
   
 })
 
+process.on('exit', (code) => {
+  console.log(`About to exit with code: ${code}`);
+});
