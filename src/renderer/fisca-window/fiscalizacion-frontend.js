@@ -16,6 +16,24 @@ function cancelButton () {
   })
 }
 
+//const number = document.getElementById('txtConst');
+const formatNum = document.querySelectorAll(".formatNum")
+//console.log(formatNum)
+
+function formatNumber (n) {
+	n = String(n).replace(/\D/g, "");
+  return n === '' ? n : Number(n).toLocaleString();
+  //console.log(number.toLocaleString('en-IN', { minimumFractionDigits: 4 }));
+  // → 1,23,000
+}
+
+for (let i = 0; i < formatNum.length; i++) {
+  formatNum[i].addEventListener('keyup', (e) => {
+    const element = e.target;
+    const value = element.value;
+    element.value = formatNumber(value);
+  })
+}
 
 document.getElementById('btnAgregar').addEventListener('click', function(event){
   //showDialog('info', 'Aviso', 'Se ha agregado el registro')

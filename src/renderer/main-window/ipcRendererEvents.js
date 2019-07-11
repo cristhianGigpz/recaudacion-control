@@ -4,6 +4,7 @@ import settings from 'electron-settings'
 import os from 'os'
 import path from 'path'
 
+
 const { Client, Pool } = require('pg')
 require('custom-env').env('config')
 
@@ -61,10 +62,9 @@ function openContribuyente() {
     contribWindow.show()
     contribWindow.focus()
   })
-
   contribWindow.loadURL(`file://${path.join(__dirname, '..')}/contribuyente.html`)
-
 }
+
 
 function openWindow(ancho, alto, titulo, center = true, plantilla){
   const BrowserWindow = remote.BrowserWindow
@@ -74,9 +74,10 @@ function openWindow(ancho, alto, titulo, center = true, plantilla){
     height: alto,
     title: titulo,
     center: center,
+    parent: mainWindow,
     modal: true,
-    frame: false,
-    show: false
+    show: false,
+    frame: false
   })
 
   if (os.platform() !== 'win32') {
