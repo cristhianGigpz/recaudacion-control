@@ -22,24 +22,27 @@
                     <div class="content">
                         <form>
                             <div class="form-group">
-                                <label>Provincia</label>
-                                <select class="form-control">
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                    <option>Option five</option>
-                                    <option>Option six</option>
-                                    <option>Option seven</option>
-                                    <option>Option eight</option>
-                                  </select>
+                                <div class="col-2 space-right">
+                                    <label>Provincia</label>
+                                    <select class="form-control" id="selectProv"></select>
+                                </div>
+                                <div class="col-2 space-left">
+                                    <label>Distrito</label>
+                                    <input type="text" class="form-control" placeholder="Nombre" id="dist">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label>Distrito</label>
-                                <input type="text" class="form-control" placeholder="Nombre" id="dist">
+                                    <div class="col-2 space-right">
+                                        <label>Código</label>
+                                        <input type="text" class="form-control" placeholder="Código" id="codigo">
+                                    </div>
+                                    <div class="col-2 space-left">
+                                        <label>Abreviatura</label>
+                                        <input type="text" class="form-control" placeholder="Abreviatura" id="abr">
+                                    </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default" id="btn-prov">Guardar</button>
+                                <button class="btn btn-default" id="btn-dist">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -53,19 +56,14 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Código</th>
                                     <th>Distrito</th>
+                                    <th>Abreviatura</th>
                                     <th>Provincia</th>
                                     <th>Departamento</th>
                                 </tr>
                             </thead>
-                            <tbody id="load-dep">
-                                <tr>
-                                    <td>1</td>
-                                    <td>El Carmen</td>
-                                    <td>Chincha Alta</td>
-                                    <td>Ica</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="load-dep"></tbody>
                         </table>
                     </div>
                 </div>
@@ -82,5 +80,6 @@
             </div>
         </footer>
     </div>
+    <script src="./dist-window/distrito-frontend.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

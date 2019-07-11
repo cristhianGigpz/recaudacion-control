@@ -1,6 +1,9 @@
 import { remote, ipcRenderer } from 'electron';
 const PDFDocument = require("pdfkit");
+const {Base64Encode} = require('base64-stream');
 const fs = require("fs");
+import os from 'os';
+import path from 'path';
 
 import { openWindow } from './ipcRendererEvents';
 const { Client, Pool } = require('pg');
@@ -33,7 +36,47 @@ class UI{
 
         return await listData;
     }
+    async loadDataJoin(){
+        const listData = connection.query(`select * from provincia a
+        inner join departamento b 
+        on a.iddepartamento = b.iddepartamento;`)
+        .then((res) =>{
+            const loadData = res.rows.length > 0 ? res.rows : [];
+            return  loadData;
+        })
+        .catch(e => console.log(e));
 
+        return await listData;
+    }
+    async loadDataJoinDistrito(){
+        const listData = connection.query(`select * from distrito a
+        inner join provincia b 
+        on a.idprovincia = b.idprovincia
+        inner join departamento c
+        on b.iddepartamento = c.iddepartamento;`)
+        .then((res) =>{
+            const loadData = res.rows.length > 0 ? res.rows : [];
+            return  loadData;
+        })
+        .catch(e => console.log(e));
+
+        return await listData;
+    }
+
+    async loadDataJoinUbanisacion(){
+        const listData = connection.query(`select 
+        a.idurb,a.codigo,
+        a.nomurbanisacion,a.abreviatura,a.iddistrito,b.nomdistrito from urbanisacion a
+        inner join distrito b
+        on a.iddistrito = b.iddistrito;`)
+        .then((res) =>{
+            const loadData = res.rows.length > 0 ? res.rows : [];
+            return  loadData;
+        })
+        .catch(e => console.log(e));
+
+        return await listData;
+    }
     /**
      * función para registrar data a la BD
      * @param {sentencia sql} _query 
@@ -87,31 +130,51 @@ class UI{
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     pdfPrint(){
         console.log('prinpdf')
         ipcRenderer.send('print-to-pdf');
 
-        this.show();
+        
     }
-    show(){
-        console.log('aaa')
-        ipcRenderer.on('wrote-pdf',(event,path)=>{
-            const message = `wrote PDF to ${path}`;
-            console.log(`akiii => ${message}`);
-        })
-    }
+    
 
-    createInvoice(invoice, path) {
+    async createInvoice (invoice, paths,iframe) {
         let doc = new PDFDocument({ margin: 50 });
-        console.log(invoice,doc);
+        //const stream = doc.pipe(blobStream());
         this.generateHeader(doc);
         this.generateCustomerInformation(doc, invoice);
         this.generateInvoiceTable(doc, invoice);
         this.generateFooter(doc);
       
+        var finalString = ''; // contains the base64 string
+        var  stream = doc.pipe(new Base64Encode());
         
-        doc.pipe(fs.createWriteStream(path));
+        //doc.pipe(fs.createWriteStream(path));
+       /* stream.on('finish', function() {
+            // iframe.src = stream.toBlobURL('application/pdf');
+            // const pdfPath = path.join(os.tmpdir(),stream.toBlobURL('application/pdf'));
+            // console.log(pdfPath);
+            const pdfPath =stream.toBlobURL('application/pdf')
+            ipcRenderer.send('print-to-pdf',pdfPath);
+          });*/
+        
+         // ipcRenderer.send('print-to-pdf',stream);
         doc.end();
+        stream.on('data', chunk => finalString += chunk );
+        stream.on('end',()=>  ipcRenderer.send('print-to-pdf', finalString))
     }
     generateHeader(doc) {
         doc

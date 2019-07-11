@@ -14,25 +14,8 @@ function setMainIpc(win) {
     event.sender.send('conectado', usuario) //Envia respuesta al ipcRender que envio el evento (contribuyente-frontend.js)
   })
 
-  ipcMain.on('print-to-pdf',(event)=>{
-    const pdfPath = path.join(os.tmpdir(),'print.pdf');
-    const win =BrowserWindow.fromWebContents(event.sender);
-    const data ='ESTE ES MI PRIMER REPORTE';
-    fs.writeFile(pdfPath,data,(error)=>{
-      if(error) return console.log(error.message);
-      shell.openExternal('file://'+pdfPath);
-      event.sender.send('wrote-pdf',pdfPath);
-      //event.sender.send('wrote-pdf','pdf print');
-    })
-   /* win.webContents.printToPDF({},(err,data)=>{
-      if(err) return console.log(err.message);
-
-      fs.writeFile(pdfPath,data,(error)=>{
-        if(error) return console.log(error.message);
-        shell.openExternal('file://'+pdfPath);
-        event.sender.send('wrote-pdf',pdfPath);
-      })
-    })*/
+  ipcMain.on('print-to-pdf',(event,finalString)=>{
+    event.sender.send('wrote-pdf',finalString);
   })
 
   ipcMain.on('open-directory', (event)=>{

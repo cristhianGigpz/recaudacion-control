@@ -24,16 +24,7 @@
                             <div class="form-group">
                                 <div class="col-2 space-right">
                                     <label>Distrito</label>
-                                    <select class="form-control">
-                                        <option>Option one</option>
-                                        <option>Option two</option>
-                                        <option>Option three</option>
-                                        <option>Option four</option>
-                                        <option>Option five</option>
-                                        <option>Option six</option>
-                                        <option>Option seven</option>
-                                        <option>Option eight</option>
-                                    </select>
+                                    <select class="form-control" id="selectDist"></select>
                                 </div>
                                 <div class="col-2 space-left">
                                     <label>Urbanisación</label>
@@ -43,7 +34,7 @@
                             <div class="form-group">
                                 <div class="col-2 space-right">
                                     <label>Abreviatura</label>
-                                    <input type="text" class="form-control" placeholder="Abreviatura" id="urb">
+                                    <input type="text" class="form-control" placeholder="Abreviatura" id="abreviatura">
                                 </div>
                                 <div class="col-2 space-left">
                                     <label>Código</label>
@@ -51,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default" id="btn-prov">Guardar</button>
+                                <button class="btn btn-default" id="btn-urb">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -67,17 +58,11 @@
                                     <th>ID</th>
                                     <th>Código</th>
                                     <th>Urbanisación</th>
+                                    <th>Abreviatura</th>
                                     <th>Distrito</th>
                                 </tr>
                             </thead>
-                            <tbody id="load-dep">
-                                <tr>
-                                    <td>1</td>
-                                    <td>A-1</td>
-                                    <td>UPIS NSTRA SERÑORA DEL CARMEN</td>
-                                    <td>El Carmen</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="load-dep"></tbody>
                         </table>
                     </div>
                 </div>
@@ -94,5 +79,6 @@
             </div>
         </footer>
     </div>
+    <script src="./urb-window/urbanisacion-frontend.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

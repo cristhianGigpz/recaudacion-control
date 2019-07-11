@@ -1,3 +1,6 @@
+const { BrowserWindow } = require('electron').remote
+import { remote, ipcRenderer } from 'electron';
+const PDFWindow = require('electron-pdf-window')
 import UI from './main-window/ui'
 const ui = new UI();
 
@@ -32,7 +35,16 @@ const SaveButton =()=>{
 const printPDF =()=>{
     const  btnPrint = document.getElementById('print-pdf');
     btnPrint.addEventListener('click',(event)=>{
-       // ui.pdfPrint();
+        /*const a = ui.pdfPrint();
+        ipcRenderer.on('wrote-pdf',(event,path)=>{
+            const message = `wrote PDF to ${path}`;
+            console.log(`akiii => ${message}`);
+            const win = new BrowserWindow({ width: 800, height: 600 })
+ 
+            PDFWindow.addSupport(win)
+            
+            win.loadURL(path)
+        })*/
        const invoice = {
         shipping: {
           name: "John Doe",
@@ -60,7 +72,22 @@ const printPDF =()=>{
         paid: 0,
         invoice_nr: 1234
       };
-       ui.createInvoice(invoice,'reportePDF.pdf')
+      var iframe = document.getElementById('viewpd');
+     ui.createInvoice(invoice,'reportePDFaaaffff.pdf',iframe);
+     ipcRenderer.on('wrote-pdf',(event,finalString)=>{
+        const message = `wrote PDF to ${finalString}`;
+        const win = new BrowserWindow({ width: 800, height: 600})
+
+        PDFWindow.addSupport(win)
+        
+        win.loadURL(finalString)
+    })
+       //iframe.src = pdf;
+       /*const win = new BrowserWindow({ width: 800, height: 600 })
+ 
+        PDFWindow.addSupport(win)
+        
+        win.loadURL(pdf)*/
     })
 }
 /*
