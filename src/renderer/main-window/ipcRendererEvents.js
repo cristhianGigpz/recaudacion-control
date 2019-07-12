@@ -56,7 +56,8 @@ function openContribuyente() {
   })
 
   if (os.platform() !== 'win32') {
-    contribWindow.setParentWindow(mainWindow)
+    console.log(mainWindow);
+    //contribWindow.setParentWindow(mainWindow)
   } 
   contribWindow.once('ready-to-show', ()=>{
     contribWindow.show()
@@ -81,7 +82,7 @@ function openWindow(ancho, alto, titulo, center = true, plantilla){
   })
 
   if (os.platform() !== 'win32') {
-    ventana.setParentWindow(mainWindow)
+    //ventana.setParentWindow(mainWindow)
   } 
   ventana.once('ready-to-show', ()=>{
     ventana.show()

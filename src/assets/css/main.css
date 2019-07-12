@@ -1,7 +1,9 @@
+.u-none{
+  display: none;
+}
 .full-height {
   height: 100%;
 }
-
 .image-view {
   display: flex;
   align-items: center;
@@ -80,6 +82,7 @@ body._bln .window{
  button{
   cursor: pointer;
 }
+.card .content form .form-group select,
 .card .content form .form-group input{
   box-sizing: border-box;
   cursor: initial;
@@ -143,6 +146,20 @@ body._bln .window{
 .float-left{
   display: inline-block;
   margin-right: 1rem;
+}
+.btn-crud{
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: #0008ff;
+  outline: none;
+}
+.btn-crud:hover{
+  color:#ff0052
+}
+.btn-crud span{
+  cursor: pointer;
+  font-size: .8rem;
 }
 @media print {
   header, footer, div.sidebar {

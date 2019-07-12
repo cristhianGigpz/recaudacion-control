@@ -27,7 +27,7 @@ class UI{
         connection.connect((err)=>{
             if(err) return err;
         });
-        const listData = connection.query(`SELECT * FROM ${table}`)
+        const listData = connection.query(`SELECT * FROM ${table} WHERE flat = $1`,[1])
         .then((res) =>{
             const loadData = res.rows.length > 0 ? res.rows : [];
             return  loadData;
@@ -36,10 +36,23 @@ class UI{
 
         return await listData;
     }
+    async loadGetDataId(table,field,value){
+        connection.connect((err)=>{
+            if(err) return err;
+        });
+        const sqlData = connection.query(`SELECT * FROM ${table} where ${field} = $1`,[value])
+        .then((res)=>{
+            const loadData = res.rows.length > 0 ? res.rows : [];
+            return  loadData;
+        })
+        .catch(e => console.log(e));
+
+        return await sqlData;
+    }
     async loadDataJoin(){
         const listData = connection.query(`select * from provincia a
         inner join departamento b 
-        on a.iddepartamento = b.iddepartamento;`)
+        on a.iddepartamento = b.iddepartamento where a.flat=1;`)
         .then((res) =>{
             const loadData = res.rows.length > 0 ? res.rows : [];
             return  loadData;
@@ -53,7 +66,7 @@ class UI{
         inner join provincia b 
         on a.idprovincia = b.idprovincia
         inner join departamento c
-        on b.iddepartamento = c.iddepartamento;`)
+        on b.iddepartamento = c.iddepartamento where a.flat=1;`)
         .then((res) =>{
             const loadData = res.rows.length > 0 ? res.rows : [];
             return  loadData;
@@ -68,7 +81,7 @@ class UI{
         a.idurb,a.codigo,
         a.nomurbanisacion,a.abreviatura,a.iddistrito,b.nomdistrito from urbanisacion a
         inner join distrito b
-        on a.iddistrito = b.iddistrito;`)
+        on a.iddistrito = b.iddistrito where a.flat=1;`)
         .then((res) =>{
             const loadData = res.rows.length > 0 ? res.rows : [];
             return  loadData;
@@ -96,7 +109,40 @@ class UI{
         .catch(e => console.log(`${new Date()} :error ==>${e}`));
         return await data;
     }
-
+    async executeQuery(query,params,table){
+        const data = connection.query(query,params)
+        .then(res =>{
+           return this.loadGetData(table)
+        })
+        .catch(e => console.log(`${new Date()} :error ==>${e}`));
+        return await data;
+    }
+    createInsertQuery (tablename, obj){
+        let insert = `insert into ${tablename}`;
+        let keys = Object.keys(obj);
+        let dollar = keys.map(function (item, idx) { return '$' + (idx + 1); });
+        let values = Object.keys(obj).map(function (k) { return obj[k]; });
+        return {
+            //query: insert + '(' + keys + ')' + ' values(' + dollar + ')',
+            query: `${insert} (${keys}) values (${dollar})`,
+            params: values
+        }
+    }
+    createUpdateQuery (tablename, obj,fields,fieldsValue){
+        let update = [`UPDATE ${tablename}`];
+        update.push('SET');
+        let set = [];
+        Object.keys(obj).forEach(function (key, i) {
+            set.push(key + ' = ($' + (i + 1) + ')'); 
+        });
+        let values = Object.keys(obj).map(function (k) { return obj[k]; });
+        update.push(set.join(', '));
+        update.push(`WHERE ${fields} = ${fieldsValue}`);
+        return {
+            query : update.join(' '),
+            params: values
+        }
+    }
 
     /**
      * función cierra formulario
@@ -130,6 +176,9 @@ class UI{
         }
     }
 
+    showDialog(options){
+        ipcRenderer.send('showMessageBox', options);
+    }
 
 
 

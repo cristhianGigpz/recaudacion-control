@@ -1,119 +1,129 @@
-const { BrowserWindow } = require('electron').remote
-import { remote, ipcRenderer } from 'electron';
-const PDFWindow = require('electron-pdf-window')
+import {ipcRenderer } from 'electron';
 import UI from './main-window/ui'
 const ui = new UI();
 
 /**
- * Load Events
+ * Carga todos los eventos al formulario
  */
 window.addEventListener('DOMContentLoaded',()=>{
-    NewDdata();
-    SaveButton();
     LoadData();
-    printPDF();
+    register();
+    cancelUpdate();
 });
 
 /**
- * Listado de Departamento
+ * Inicializa los datos en el formulario
  */
 const LoadData =()=>{
-    const element = ui.loadGetData('departamento');
-    element.then((e)=>{LoaderData(e)})
+    //const element = ui.loadGetData('departamento');
+    //element.then((e)=>{LoaderData(e)})
     //cerrar formulario
+    listGrilla();
     ui.closeFrom('cancel-button');
 }
 
-const SaveButton =()=>{
+/**
+ * Lista los datos de la tabla
+ */
+const listGrilla =()=>{
+    const dep = ui.loadGetData('departamento');
+    dep.then((e)=>{LoaderData(e)})
+}
+
+/**
+ * Registra y Actualiza los datos a la tablas
+ */
+const register =()=>{
     document.getElementById('btn-guardar').addEventListener('click',(e)=>{
         e.preventDefault();
         const _name = document.getElementById('dep').value;
-        const element = ui.insertData('INSERT INTO departamento(nombre_departamento) VALUES($1);',[_name],'departamento');
-        element.then((e)=>{LoaderData(e)})
-    })
-}
-const printPDF =()=>{
-    const  btnPrint = document.getElementById('print-pdf');
-    btnPrint.addEventListener('click',(event)=>{
-        /*const a = ui.pdfPrint();
-        ipcRenderer.on('wrote-pdf',(event,path)=>{
-            const message = `wrote PDF to ${path}`;
-            console.log(`akiii => ${message}`);
-            const win = new BrowserWindow({ width: 800, height: 600 })
- 
-            PDFWindow.addSupport(win)
-            
-            win.loadURL(path)
-        })*/
-       const invoice = {
-        shipping: {
-          name: "John Doe",
-          address: "1234 Main Street",
-          city: "San Francisco",
-          state: "CA",
-          country: "US",
-          postal_code: 94111
-        },
-        items: [
-          {
-            item: "TC 100",
-            description: "Toner Cartridge",
-            quantity: 2,
-            amount: 6000
-          },
-          {
-            item: "USB_EXT",
-            description: "USB Cable Extender",
-            quantity: 1,
-            amount: 2000
-          }
-        ],
-        subtotal: 8000,
-        paid: 0,
-        invoice_nr: 1234
-      };
-      var iframe = document.getElementById('viewpd');
-     ui.createInvoice(invoice,'reportePDFaaaffff.pdf',iframe);
-     ipcRenderer.on('wrote-pdf',(event,finalString)=>{
-        const message = `wrote PDF to ${finalString}`;
-        const win = new BrowserWindow({ width: 800, height: 600})
+        let cod = parseInt(document.getElementById('cod').value);
+        if(_name === 0 ){
+            alert("llene toda la informacion");
+            return false;
+        }
+        let data = {nombre_departamento:_name}
+        const commanQuery = (cod === 0) 
+            ?  ui.createInsertQuery('departamento',data) 
+            : ui.createUpdateQuery('departamento',data,'iddepartamento',cod);
+        const result = ui.executeQuery(commanQuery.query,commanQuery.params,'departamento');
+        reload(result);
 
-        PDFWindow.addSupport(win)
-        
-        win.loadURL(finalString)
-    })
-       //iframe.src = pdf;
-       /*const win = new BrowserWindow({ width: 800, height: 600 })
- 
-        PDFWindow.addSupport(win)
-        
-        win.loadURL(pdf)*/
+        /*const element = ui.insertData('INSERT INTO departamento(nombre_departamento) VALUES($1);',[_name],'departamento');
+        element.then((e)=>{LoaderData(e)})*/
     })
 }
-/*
-const EditButton =()=>{
-    document.getElementById('edit').addEventListener('click',(e)=>{
-        e.preventDefault();
-       
-       alert('data para editar')
-    })
-}*/
-const NewDdata =()=>{
-    document.getElementById('new-data').addEventListener('click',()=>{
-       alert('nuevo');
-    })
+
+/**
+ * Limpia campo del formulario
+ */
+const clear =()=>{
+    document.getElementById('dep').value = '';
+    document.getElementById('cod').value = '0';
+    document.getElementById("btn-cancelar").classList.add('u-none');
+    document.getElementById('btn-guardar').innerText ="Guardar";
 }
-const EditButton =()=>{
-    let el = document.createElement('button');
-    el.id='edit';
-    el.innerHTML =`<span class="icon icon-pencil"></span>`;
-    el.addEventListener('click',()=>{
-        alert('click')
+
+/**
+ * Recarga la grilla
+ * @param {Matriz de datos} element 
+ */
+const reload =(element)=>{
+    element.then((e)=>{
+        listGrilla();
+        clear();
     });
-    /*document.body.appendChild(el);*/
+}
 
-    //return el.outerHTML;
-    return el;
+/**
+ * Cancela la actualizacion de los datos
+ */
+const cancelUpdate=()=>{
+    document.getElementById("btn-cancelar").addEventListener("click",(e)=>{
+        e.preventDefault();
+        document.getElementById("btn-cancelar").classList.add('u-none');
+        clear();
+    })
+}
+
+/**
+ * Elemento button atributo ID
+ * @param {this} element 
+ */
+const btnEditar = (element)=>{
+    const fullData = ui.loadGetDataId('departamento','iddepartamento',element.id);
+    document.getElementById("btn-cancelar").classList.remove("u-none");
+    fullData.then((items)=>{
+        document.getElementById('cod').value = items[0].iddepartamento;
+        document.getElementById('btn-guardar').innerText ="Actualizar";
+        document.getElementById('dep').value= items[0].nombre_departamento;
+    })
+}
+
+/**
+ * Elemento button atributo ID
+ * @param {this} element 
+ */
+const btnDelete = (element)=>{
+    let id = element.id;
+    let options  = {
+        title:"Eliminar Registro",
+        buttons: ["Si","No"],
+        message: "Eliminar Registro?",
+        detail: 'Al eliminar no se puede recuperar',
+        type : "question",
+       }
+    ui.showDialog(options);
+    let data = {flat:'0'}
+    const commanQuery = ui.createUpdateQuery('departamento',data,'iddepartamento',id);
+    ipcRenderer.on('MessageBox',(event,res)=>{
+        //res = 0 -> eliminar el registro
+        //res = 1 -> no elimina nada
+        if(res === 0){
+           const result = ui.executeQuery(commanQuery.query,commanQuery.params,'departamento');
+            reload(result);
+        }
+    });
 }
 /**
  * 
@@ -125,9 +135,9 @@ const LoaderData=(items)=>{
         card +=`<tr>
                 <td>${e.iddepartamento}</td>
                 <td>${e.nombre_departamento}</td>
-                <td id="list">
-                    ${EditButton()}
-                    <button id="remove"><span class="icon icon-cancel"></span></button>
+                <td>
+                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnEditar(this)"><span class="icon icon-pencil"></span></button>
+                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnDelete(this)"><span class="icon icon-trash"></span></button>
                 </td>
             </tr>`;
     });

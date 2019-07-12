@@ -18,6 +18,12 @@ function setMainIpc(win) {
     event.sender.send('wrote-pdf',finalString);
   })
 
+  ipcMain.on("showMessageBox",(event,options)=>{
+    dialog.showMessageBox(win, options,(res, checked) => {
+      event.sender.send('MessageBox', res)
+    })
+  })
+  
   ipcMain.on('open-directory', (event)=>{
     dialog.showOpenDialog(win, {
       title: 'seleccione la nueva ubicacion',
