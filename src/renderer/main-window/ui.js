@@ -123,7 +123,6 @@ class UI{
         let dollar = keys.map(function (item, idx) { return '$' + (idx + 1); });
         let values = Object.keys(obj).map(function (k) { return obj[k]; });
         return {
-            //query: insert + '(' + keys + ')' + ' values(' + dollar + ')',
             query: `${insert} (${keys}) values (${dollar})`,
             params: values
         }
