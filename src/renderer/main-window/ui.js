@@ -1,9 +1,4 @@
 import { remote, ipcRenderer } from 'electron';
-const PDFDocument = require("pdfkit");
-const {Base64Encode} = require('base64-stream');
-const fs = require("fs");
-import os from 'os';
-import path from 'path';
 
 import { openWindow } from './ipcRendererEvents';
 const { Client, Pool } = require('pg');
@@ -109,19 +104,6 @@ class UI{
      * @param {valores agregar} value 
      * @param {tabla para el reload de data} table 
      */
-
-    async insertData(_query,value,table){
-        const sql ={
-            text: _query,
-            values:value
-        }
-        const data = connection.query(sql)
-        .then(res =>{
-           return this.loadGetData(table)
-        })
-        .catch(e => console.log(`${new Date()} :error ==>${e}`));
-        return await data;
-    }
     async executeQuery(query,params,table){
         const data = connection.query(query,params)
         .then(res =>{
@@ -215,115 +197,5 @@ class UI{
         }
         return bool;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    pdfPrint(){
-        console.log('prinpdf')
-        ipcRenderer.send('print-to-pdf');
-
-        
-    }
-    
-
-    async createInvoice (invoice, paths,iframe) {
-        let doc = new PDFDocument({ margin: 50 });
-        //const stream = doc.pipe(blobStream());
-        this.generateHeader(doc);
-        this.generateCustomerInformation(doc, invoice);
-        this.generateInvoiceTable(doc, invoice);
-        this.generateFooter(doc);
-      
-        var finalString = ''; // contains the base64 string
-        var  stream = doc.pipe(new Base64Encode());
-        
-        //doc.pipe(fs.createWriteStream(path));
-       /* stream.on('finish', function() {
-            // iframe.src = stream.toBlobURL('application/pdf');
-            // const pdfPath = path.join(os.tmpdir(),stream.toBlobURL('application/pdf'));
-            // console.log(pdfPath);
-            const pdfPath =stream.toBlobURL('application/pdf')
-            ipcRenderer.send('print-to-pdf',pdfPath);
-          });*/
-        
-         // ipcRenderer.send('print-to-pdf',stream);
-        doc.end();
-        stream.on('data', chunk => finalString += chunk );
-        stream.on('end',()=>  ipcRenderer.send('print-to-pdf', finalString))
-    }
-    generateHeader(doc) {
-        doc
-          .fillColor("#444444")
-          .fontSize(20)
-          .text("ACME Inc.", 110, 57)
-          .fontSize(10)
-          .text("123 Main Street", 200, 65, { align: "right" })
-          .text("New York, NY, 10025", 200, 80, { align: "right" })
-          .moveDown();
-    }
-    generateCustomerInformation(doc, invoice) {
-        const shipping = invoice.shipping;
-      
-        doc
-          .text(`Invoice Number: ${invoice.invoice_nr}`, 50, 200)
-          .text(`Invoice Date: ${new Date()}`, 50, 215)
-          .text(`Balance Due: ${invoice.subtotal - invoice.paid}`, 50, 130)
-      
-          .text(shipping.name, 300, 200)
-          .text(shipping.address, 300, 215)
-          .text(
-            `${shipping.city}, ${shipping.state}, ${shipping.country}`,
-            300,
-            130
-          )
-          .moveDown();
-    }
-    generateInvoiceTable(doc, invoice) {
-        let i,
-          invoiceTableTop = 330;
-      
-        for (i = 0; i < invoice.items.length; i++) {
-          const item = invoice.items[i];
-          const position = invoiceTableTop + (i + 1) * 30;
-          this.generateTableRow(
-            doc,
-            position,
-            item.item,
-            item.description,
-            item.amount / item.quantity,
-            item.quantity,
-            item.amount
-          );
-        }
-    }
-    generateFooter(doc) {
-        doc
-          .fontSize(10)
-          .text(
-            "Payment is due within 15 days. Thank you for your business.",
-            50,
-            780,
-            { align: "center", width: 500 }
-          );
-    }
-    generateTableRow(doc, y, c1, c2, c3, c4, c5) {
-        doc
-          .fontSize(10)
-          .text(c1, 50, y)
-          .text(c2, 150, y)
-          .text(c3, 280, y, { width: 90, align: "right" })
-          .text(c4, 370, y, { width: 90, align: "right" })
-          .text(c5, 0, y, { align: "right" });
-      }
 }
 export default UI;
