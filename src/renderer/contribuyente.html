@@ -20,45 +20,28 @@
 						<h4>Registro Contribuyente</h4>
 					</div>
 					<div class="content">
-						<form>
+						<form id="form-contribuyente">
 							<div class="form-group">
 								<div class="col-4 space-right">
 									<label>nombre / razon-social</label>
-									<input type="text" class="form-control" placeholder="nombre / razon-social" id="nom">
+									<input type="text" class="form-control" placeholder="nombre / razon-social" id="nombre_razon">
 								</div>
 								<div class="col-4 space-left">
 									<label>Tipo Documento</label>
-									<div class="list-radio">
-										<div class="radio">
-											<label>
-												<input type="radio" name="radios" checked>
-												DNI
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="radios" checked>
-												OTRO DOCUMENTO
-											</label>
-										</div>
-									</div>
+									<select class="form-control" id="selectDoc">
+										<option value="0">Seleccione Documento</option>
+										<option value="DNI">DNI</option>
+										<option value="PASAPORTE">PASAPORTE</option>
+										<option value="CARNET">CARNET</option>
+									</select>
 								</div>
 								<div class="col-4 space-left">
 									<label>numero</label>
-									<input type="text" class="form-control" placeholder="Numero" id="numero">
+									<input type="text" class="form-control" placeholder="Numero" id="numero_doc">
 								</div>
 								<div class="col-4 space-left">
 									<label>Urbanisación</label>
-									<select class="form-control">
-										<option>Option one</option>
-										<option>Option two</option>
-										<option>Option three</option>
-										<option>Option four</option>
-										<option>Option five</option>
-										<option>Option six</option>
-										<option>Option seven</option>
-										<option>Option eight</option>
-									</select>
+									<select class="form-control" id="selectUrba"></select>
 								</div>
 								<div class="col-4 space-left">
 									<label>Dirección</label>
@@ -74,13 +57,13 @@
 									<div class="list-radio">
 										<div class="radio">
 											<label>
-												<input type="radio" name="radios" checked>
+												<input type="radio" name="rbTipoPersona" value="JURIDICA">
 												JURIDICA
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="radios" checked>
+												<input type="radio" name="rbTipoPersona" value="NATURAL">
 												NATURAL
 											</label>
 										</div>
@@ -96,7 +79,7 @@
 								</div>
 								<div class="col-4 space-left">
 									<label>Departamento</label>
-									<input type="text" class="form-control" placeholder="Departamento" id="Departamento">
+									<input type="text" class="form-control" placeholder="Departamento" id="departamento">
 								</div>
 								<div class="col-4 space-left">
 									<label>numero</label>
@@ -109,55 +92,60 @@
 									<div class="list-radio">
 										<div class="radio">
 											<label>
-												<input type="radio" name="radios" checked>
+												<input type="radio" name="rbMotivo" value="A">
 												A
 											</label>
 										</div>
 										<div class="radio">
 											<label>
-												<input type="radio" name="radios" checked>
-												B
+												<input type="radio" name="rbMotivo"  value="B">
+												B checked
 											</label>
 										</div>
 									</div>
 								</div>
 								<div class="col-4 space-left">
 									<label>total anexo</label>
-									<input type="text" class="form-control" placeholder="total anexo" id="total">
+									<input type="text" class="form-control" placeholder="total anexo" id="total_anexo">
 								</div>
 								<div class="col-4 space-left">
 									<label>estado </label>
 									<div class="list-radio">
 										<div class="checkbox">
 											<label>
-												<input type="checkbox"> estado
+												<input type="checkbox" id="checkEstado"> estado
 											</label>
 										</div>
 									</div>
 								</div>
 								<div class="col-4 space-left">
 									<label>impuesto anual</label>
-									<input type="text" class="form-control" placeholder="impuesto anual" id="impuesto">
+									<input type="text" class="form-control" placeholder="impuesto anual" id="impuesto_anual">
 								</div>
 								<div class="col-4 space-left">
 									<label>valor total exonerado</label>
-									<input type="text" class="form-control" placeholder="valor total exonerado" id="exonerado">
+									<input type="text" class="form-control" placeholder="valor total exonerado" id="total_exonerado">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-4 space-right">
 									<label>valor total predio</label>
-									<input type="text" class="form-control" placeholder="valor total predio" id="predio">
+									<input type="text" class="form-control" placeholder="valor total predio" id="total_predio">
 								</div>
 								<div class="col-4 space-left">
 									<label>base imponible</label>
-									<input type="text" class="form-control" placeholder="base imponible" id="base">
+									<input type="text" class="form-control" placeholder="base imponible" id="base_imponible">
+								</div>
+								<div class="col-4 space-left">
+									<label>teléfono</label>
+									<input type="text" class="form-control" placeholder="teléfono" id="telefono">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-1 ">
 									<label>observacion</label>
-									<textarea class="form-control" rows="3"></textarea>
+									<input type="hidden" id="cod" value="0">
+									<textarea class="form-control" id="observacion" rows="3"></textarea>
 								</div>
 							</div>
 						</form>
@@ -168,7 +156,7 @@
 		<footer class="toolbar toolbar-footer">
 			<div class="toolbar-actions">
 				<button id="reg-contribuyente-end" class="btn btn-default">Cancelar</button>
-				<button id="save-button" type="submit" form="preferences-form" class="btn btn-primary pull-right">Guardar</button>
+				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
 			</div>
 		</footer>
 	</div>

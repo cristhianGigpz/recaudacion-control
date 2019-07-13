@@ -90,6 +90,19 @@ class UI{
 
         return await listData;
     }
+
+    async loadDataJoinContribuyente(){
+        const listContribuyente = connection.query(`select b.idurb,b.nomurbanisacion,a.* from contribuyente a
+            inner join urbanisacion b 
+            on a.idurb = b.idurb
+            where a.flat = 1;`)
+        .then((resp) =>{
+            const loadContrib = resp.rows.length > 0 ? resp.rows : [];
+            return  loadContrib;
+        })
+        .catch(e => console.log(e));
+        return await listContribuyente;
+    }
     /**
      * función para registrar data a la BD
      * @param {sentencia sql} _query 
@@ -174,9 +187,33 @@ class UI{
             })
         }
     }
-
+    /**
+     * 
+     * @param {*} options 
+     */
     showDialog(options){
         ipcRenderer.send('showMessageBox', options);
+    }
+
+    validateFrom(form){
+        let bool = true;
+        for(let i=0; i<form.elements.length; i++) {
+            let elemento = form.elements[i];
+            if(elemento.value === 0 || elemento.value ===''){
+                bool = false;
+            }
+            /*if(elemento.type == "checkbox") {
+                if(!elemento.checked) {
+                    bool = false;
+                }
+            }*/
+            if(elemento.type == "radio") {
+                if(elemento.checked) {
+                    bool = true;
+                }
+            }
+        }
+        return bool;
     }
 
 
