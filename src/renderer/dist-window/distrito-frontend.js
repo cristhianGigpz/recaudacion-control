@@ -50,8 +50,8 @@ const register =()=>{
             return false;
         }
         let data = {codigo:codigo , nomDistrito:dist,abreviatura:abr,idprovincia:strProv}
-        const commanQuery = (cod === 0) 
-            ?  ui.createInsertQuery('distrito',data) 
+        const commanQuery = (cod === 0)
+            ?  ui.createInsertQuery('distrito',data)
             : ui.createUpdateQuery('distrito',data,'iddistrito',cod);
         const result = ui.executeQuery(commanQuery.query,commanQuery.params,'distrito');
         reload(result);

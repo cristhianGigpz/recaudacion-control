@@ -181,7 +181,7 @@ class UI{
         let bool = true;
         for(let i=0; i<form.elements.length; i++) {
             let elemento = form.elements[i];
-            if(elemento.value === 0 || elemento.value ===''){
+            if(elemento.type != radio && (elemento.value === 0 || elemento.value ==='')){
                 bool = false;
             }
             /*if(elemento.type == "checkbox") {
@@ -189,13 +189,18 @@ class UI{
                     bool = false;
                 }
             }*/
-            if(elemento.type == "radio") {
+
+            /*if(elemento.type == "radio") {
                 if(elemento.checked) {
                     bool = true;
                 }
-            }
+            }*/
         }
         return bool;
+    }
+
+    valueElement(inputId){
+        
     }
 }
 export default UI;

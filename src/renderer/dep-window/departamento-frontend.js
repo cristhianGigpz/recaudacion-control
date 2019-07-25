@@ -31,6 +31,25 @@ const listGrilla =()=>{
 }
 
 /**
+ * 
+ * @param {matriz departamento} items
+ */
+const LoaderData=(items)=>{
+    let card = '';
+    items.forEach((e)=>{
+        card +=`<tr>
+                <td>${e.iddepartamento}</td>
+                <td>${e.nombre_departamento}</td>
+                <td>
+                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnEditar(this)"><span class="icon icon-pencil"></span></button>
+                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnDelete(this)"><span class="icon icon-trash"></span></button>
+                </td>
+            </tr>`;
+    });
+
+    document.getElementById("load-dep").innerHTML = card;
+}
+/**
  * Registra y Actualiza los datos a la tablas
  */
 const register =()=>{
@@ -43,7 +62,7 @@ const register =()=>{
             return false;
         }
         let data = {nombre_departamento:_name}
-        const commanQuery = (cod === 0) 
+        const commanQuery = (cod === 0)
             ?  ui.createInsertQuery('departamento',data) 
             : ui.createUpdateQuery('departamento',data,'iddepartamento',cod);
         const result = ui.executeQuery(commanQuery.query,commanQuery.params,'departamento');
@@ -124,22 +143,4 @@ const btnDelete = (element)=>{
             reload(result);
         }
     });
-}
-/**
- * 
- * @param {matriz departamento} items 
- */
-const LoaderData=(items)=>{
-    let card = '';
-    items.forEach((e)=>{
-        card +=`<tr>
-                <td>${e.iddepartamento}</td>
-                <td>${e.nombre_departamento}</td>
-                <td>
-                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnEditar(this)"><span class="icon icon-pencil"></span></button>
-                    <button id="${e.iddepartamento}" class="btn-crud" onclick="btnDelete(this)"><span class="icon icon-trash"></span></button>
-                </td>
-            </tr>`;
-    });
-    document.getElementById("load-dep").innerHTML = card;
 }

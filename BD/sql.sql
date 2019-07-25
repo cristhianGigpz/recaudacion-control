@@ -42,7 +42,7 @@ idDistrito int
 
 
 ALTER TABLE contribuyente ADD COLUMN flat INT DEFAULT '1'
-CREATE TYPE _tipoDocu AS ENUM('DNI','PASAPORTE','CARNET');
+CREATE TYPE _tipoDocu AS ENUM('RUC','DNI','PASAPORTE','CARNET');
 CREATE TYPE _tipo_persona AS ENUM('JURIDICA','NATURAL');
 select * from contribuyente;
 create table contribuyente(

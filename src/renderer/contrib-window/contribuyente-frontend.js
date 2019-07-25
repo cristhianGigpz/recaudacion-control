@@ -58,6 +58,7 @@ const register =()=>{
       let check_estado = document.getElementById('checkEstado');
       let check_estado_value = check_estado.checked ? 1 : 0;
       let form = document.getElementById("form-contribuyente");
+      
       let valid = ui.validateFrom(form);
       if(valid){
         let tipo_persona_value;
@@ -80,7 +81,7 @@ const register =()=>{
           estado:check_estado_value,impuesto_anula:impuesto_anual,valor_total_exonerado:total_exonerado,valor_total_predio:total_predio,base_imponible_a:base_imponible
         }
         
-        const commanQuery = (cod === 0) 
+        const commanQuery = (cod === 0)
             ?  ui.createInsertQuery('contribuyente',data) 
             : ui.createUpdateQuery('contribuyente',data,'idcontribuyente',cod);
             const result = ui.executeQuery(commanQuery.query,commanQuery.params,'contribuyente');
