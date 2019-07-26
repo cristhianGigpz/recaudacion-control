@@ -199,8 +199,16 @@ class UI{
         return bool;
     }
 
-    valueElement(inputId){
-        
+    valueElement(elements){
+        let datos = []
+        for(let i=0; i < elements.length; i++) {
+            let elemento = elements[i];
+            //if(elemento.type != radio && (elemento.value === 0 || elemento.value ==='')){
+            if(elemento.type == 'text'){
+                datos.push(elemento.value)
+            }    
+        }
+        return datos
     }
 }
 export default UI;

@@ -59,6 +59,8 @@ const register =()=>{
       let check_estado_value = check_estado.checked ? 1 : 0;
       let form = document.getElementById("form-contribuyente");
       
+      let dataForm = ui.valueElement(form)
+      alert(dataForm); return false;
       let valid = ui.validateFrom(form);
       if(valid){
         let tipo_persona_value;
