@@ -235,7 +235,7 @@ class UI {
         elemento.type != "radio" &&
         elemento.type != "checkbox"
       ) {
-        elemento.value = 0;
+        elemento.value = "";
       }
     }
   }

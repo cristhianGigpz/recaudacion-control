@@ -13,7 +13,6 @@ const btnRegistro = () => {
     ui.openWindows("btn-add", 1230, 610, "Contribuyente", "contribuyente");
 };
   const closeRegistroContribuyente = () => {
-    ui.closeFrom("reg-contribuyente-end");
     ui.closeFrom("btn-close");
 };
   

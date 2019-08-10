@@ -25,7 +25,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const closeRegistroContribuyente = () => {
   ui.closeFrom("reg-contribuyente-end");
-  ui.closeFrom("btn-close");
   //connection.end();
 };
 
@@ -41,10 +40,30 @@ const LoadData = () => {
  * Lista los datos de la tabla
  */
 const listGrilla = () => {
-  const dep = ui.loadGetData("contribuyente");
+  const dep = ui.loadGetData("contribuyente"); //CONECTA CON LA BD Y TRAE DATOS DE TABLA
   dep.then(e => {
     //LoaderData(e);
   });
+};
+
+const LoaderData = items => {
+  let card = "";
+  items.forEach(e => {
+    card += `<tr>
+                <td>${e.iddepartamento}</td>
+                <td>${e.nombre_departamento}</td>
+                <td>
+                    <button id="${
+                      e.iddepartamento
+                    }" class="btn-crud" onclick="btnEditar(this)"><span class="icon icon-pencil"></span></button>
+                    <button id="${
+                      e.iddepartamento
+                    }" class="btn-crud" onclick="btnDelete(this)"><span class="icon icon-trash"></span></button>
+                </td>
+            </tr>`;
+  });
+
+  document.getElementById("load-dep").innerHTML = card;
 };
 
 const register = () => {
@@ -100,8 +119,8 @@ const register = () => {
       commanQuery.params,
       "contribuyente"
     );
-    //console.log(result)
     ui.clearElements(form)
+    console.log('datos insertados !')
     //console.log(commanQuery.query)
     //console.log(commanQuery.params)
     //reload(result);
@@ -115,25 +134,22 @@ contribuyente-frontend.js? [sm]:58 (20) ["CRISTHIAN JOEL ACEVEDO TIPIAN", "DNI"
   });
 };
 
-const clear = () => {
-  document.getElementById("cod").value = "0";
-  document.getElementById("nombre_razon").value = "";
-  document.getElementById("selectDoc").value = 0;
-  document.getElementById("numero_doc").value = "";
-  document.getElementById("selectUrba").value = 0;
-  document.getElementById("direccion").value = "";
-  document.getElementById("lote").value = "";
-  document.getElementById("manzana").value = "";
-  document.getElementById("departamento").value = "";
-  document.getElementById("numero").value = "";
-  document.getElementById("total_anexo").value = "";
-  document.getElementById("impuesto_anual").value = "";
-  document.getElementById("total_exonerado").value = "";
-  document.getElementById("total_predio").value = "";
-  document.getElementById("base_imponible").value = "";
-  document.getElementById("observacion").value = "";
-  document.getElementById("telefono").value = "";
-  document.getElementsByName("rbTipoPersona").checked = false;
-  document.getElementsByName("rbMotivo").checked = false;
-  document.getElementById("checkEstado").checked = 0;
+//clear en ui//
+
+const reload = element => {
+  element.then(e => {
+    listGrilla();
+    //clear();
+  });
+};
+
+/**
+ * Cancela la actualizacion de los datos
+ */
+const cancelUpdate = () => {
+  document.getElementById("btn-cancelar").addEventListener("click", e => {
+    e.preventDefault();
+    document.getElementById("btn-cancelar").classList.add("u-none");
+    //clear();
+  });
 };
