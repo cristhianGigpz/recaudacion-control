@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Urbanisación</title>
+    <link rel="stylesheet" href="../assets/css/photon.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+</head>
+<body class="_bln">
+    <div class="window">
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Contribuyente</h1>
+        </header>
+        <div class="window-content">
+            <div class="container-fluid-list">
+                <div class="card">
+                    <div class="header">
+                        <h4>Lista Contribuyente</h4>
+                    </div>
+                    <div class="padded-more">
+                        <form class="col-2">
+                            <div class="form-group">
+                                <div class="float-left">
+                                    <label>Buscar Contribuyente</label>
+                                    <input type="text" class="form-control" placeholder="Nombre" id="dep">
+                                </div>
+                                <div class="float-left">
+                                    <button class="btn btn-default" id="btn-buscar">Buscar</button>
+                                    <button class="btn btn-default" id="btn-add">Agregar</button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>nombre / razon-social</th>
+                                        <th>tipo persona</th>
+                                        <th>tipo Documento</th>
+                                        <th>numero Documento</th>
+                                        <th>Urbanisación</th>
+                                        <th>dirección</th>
+                                        <th>lote</th>
+                                        <th>manzana</th>
+                                        <th>departamento</th>
+                                        <th>numero</th>
+                                        <th>telefono</th>
+                                        <th>motivo</th>
+                                        <th>total Anexo</th>
+                                        <th>estado</th>
+                                        <th>inpuesto Anual</th>
+                                        <th>valor Total Exonerado</th>
+                                        <th>valor Total Predio</th>
+                                        <th>base Imponible</th>
+                                        <th>observacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="load-dep"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="toolbar toolbar-footer">
+            <div class="toolbar-actions">
+                <button id="btn-close" class="btn btn-default">Salir</button>
+            </div>
+        </footer>
+    </div>
+    <script src="./contrib-window/listado-contribuyente.js" type="text/javascript" charset="utf-8"></script>
+</body> 
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Contribuyente</title>
+  <link rel="stylesheet" href="../assets/css/photon.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+    
+</head>
+<body class="_bln">
+	<div class="window">
+		<header class="toolbar toolbar-header">
+			<h1 class="title">Contribuyentes</h1>
+		</header>
+		<div class="window-content" id="destino">
+			<div class="container-fluid">
+				<div class="card">
+					<div class="header">
+						<h4>Registro Contribuyente</h4>
+					</div>
+					<div class="content">
+						<form id="form-contribuyente">
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>nombre / razon-social</label>
+									<input type="text" class="form-control" placeholder="nombre / razon-social" id="nombre_razon">
+								</div>
+								<div class="col-4 space-left">
+									<label>Tipo Documento</label>
+									<select class="form-control" id="selectDoc">
+										<option value="0">Seleccione Documento</option>
+										<option value="DNI">DNI</option>
+										<option value="PASAPORTE">PASAPORTE</option>
+										<option value="CARNET">CARNET</option>
+									</select>
+								</div>
+								<div class="col-4 space-left">
+									<label>numero</label>
+									<input type="text" class="form-control" placeholder="Numero" id="numero_doc">
+								</div>
+								<div class="col-4 space-left">
+									<label>Urbanisación</label>
+									<select class="form-control" id="selectUrba">
+										<option value="0">Urbanisación</option>
+										<option value="1">CERCADO DEL CARMEN</option>
+									</select>
+								</div>
+								<div class="col-4 space-left">
+									<label>Dirección</label>
+									<input type="text" class="form-control" placeholder="Dirección" id="direccion">
+								</div>
+							</div>
+							<div class="separator">
+								<p>Domicilio</p>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>Tipo Persona</label>
+									<div class="list-radio">
+										<div class="radio">
+											<label>
+												<input type="radio" name="rbTipoPersona" value="JURIDICA">
+												JURIDICA
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="rbTipoPersona" value="NATURAL">
+												NATURAL
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>lote</label>
+									<input type="text" class="form-control" placeholder="lote" id="lote">
+								</div>
+								<div class="col-4 space-left">
+									<label>manzana</label>
+									<input type="text" class="form-control" placeholder="manzana" id="manzana">
+								</div>
+								<div class="col-4 space-left">
+									<label>Departamento</label>
+									<input type="text" class="form-control" placeholder="Departamento" id="departamento">
+								</div>
+								<div class="col-4 space-left">
+									<label>numero</label>
+									<input type="text" class="form-control" placeholder="numero" id="numero">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>motivo </label>
+									<div class="list-radio">
+										<div class="radio">
+											<label>
+												<input type="radio" name="rbMotivo" value="A">
+												A
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="rbMotivo"  value="B">
+												B
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>total anexo</label>
+									<input type="text" class="form-control" placeholder="total anexo" id="total_anexo">
+								</div>
+								<div class="col-4 space-left">
+									<label>estado </label>
+									<div class="list-radio">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="checkEstado"> Activo
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 space-left">
+									<label>impuesto anual</label>
+									<input type="text" class="form-control" placeholder="impuesto anual" id="impuesto_anual">
+								</div>
+								<div class="col-4 space-left">
+									<label>valor total exonerado</label>
+									<input type="text" class="form-control" placeholder="valor total exonerado" id="total_exonerado">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>valor total predio</label>
+									<input type="text" class="form-control" placeholder="valor total predio" id="total_predio">
+								</div>
+								<div class="col-4 space-left">
+									<label>base imponible</label>
+									<input type="text" class="form-control" placeholder="base imponible" id="base_imponible">
+								</div>
+								<div class="col-4 space-left">
+									<label>teléfono</label>
+									<input type="text" class="form-control" placeholder="teléfono" id="telefono">
+								</div>
+								<div class="col-4 space-left">
+									<label>Dif.Impuesto</label>
+									<input type="text" class="form-control" placeholder="dif" id="dif">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-1 ">
+									<label>observacion</label>
+									<input type="hidden" id="cod" value="0">
+									<textarea class="form-control" id="observacion" rows="3"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="toolbar toolbar-footer">
+			<div class="toolbar-actions">
+				<button id="reg-contribuyente-end" class="btn btn-default">Cancelar</button>
+				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
+			</div>
+		</footer>
+	</div>
+	<script src="./contrib-window/contribuyente-frontend.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

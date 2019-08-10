@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Urbanisación</title>
+    <link rel="stylesheet" href="../assets/css/photon.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css"> 
+</head>
+<body class="_bln">
+    <div class="window">
+        <header class="toolbar toolbar-header">
+            <h1 class="title">Urbanisación</h1>
+        </header>
+        <div class="window-content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="header">
+                        <h4>Registro Urbanisación</h4>
+                    </div>
+                    <div class="content">
+                        <form>
+                            <div class="form-group">
+                                <div class="col-2 space-right">
+                                    <label>Distrito</label>
+                                    <select class="form-control" id="selectDist"></select>
+                                </div>
+                                <div class="col-2 space-left">
+                                    <label>Urbanisación</label>
+                                    <input type="text" class="form-control" placeholder="Nombre" id="urb">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-2 space-right">
+                                    <label>Abreviatura</label>
+                                    <input type="text" class="form-control" placeholder="Abreviatura" id="abreviatura">
+                                </div>
+                                <div class="col-2 space-left">
+                                    <label>Código</label>
+                                    <input type="text" class="form-control" placeholder="Código" id="cod">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="id" value="0">
+                                <button class="btn btn-default" id="btn-urb">Guardar</button>
+                                <button class="btn btn-default u-none" id="btn-cancelar">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h4>Listado Urbanisación</h4>
+                    </div>
+                    <div class="padded-more">
+                        <table class="table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Código</th>
+                                    <th>Urbanisación</th>
+                                    <th>Abreviatura</th>
+                                    <th>Distrito</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="load-dep"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="toolbar toolbar-footer">
+            <div class="toolbar-actions">
+              <button id="cancel-button" class="btn btn-default">
+                Salir
+              </button>
+              <button id="new-data" type="submit" form="preferences-form" class="btn btn-primary pull-right">
+                Nuevo
+              </button>
+            </div>
+        </footer>
+    </div>
+    <script src="./urb-window/urbanisacion-frontend.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

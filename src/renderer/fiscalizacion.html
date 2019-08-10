@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fiscalizacion</title>
+  <!-- <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="../assets/css/photon.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  
+  
+  <!-- <script src="../assets/bootstrap/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+  <div class="window">
+    <header class="toolbar toolbar-header">
+      <h1 class="title">Fiscalizacion</h1>
+      <div class="toolbar-actions">
+        <div class="btn-group">
+          <button class="btn btn-default">
+            <span class="icon icon-home"></span>
+          </button>
+          <button class="btn btn-default">
+            <span class="icon icon-folder"></span>
+          </button>
+          <button class="btn btn-default active">
+            <span class="icon icon-cloud"></span>
+          </button>
+          <button class="btn btn-default">
+            <span class="icon icon-popup"></span>
+          </button>
+          <button class="btn btn-default">
+            <span class="icon icon-shuffle"></span>
+          </button>
+          <button class="btn btn-default" id="cancel-button" title="Salir">
+            <span class="icon icon-export"></span>
+          </button>
+        </div>    
+    </header>
+    <div class="window-content">
+        <div class="padded-more">
+          <form id="frmAgregar" name="frmAgregar">
+            <div class="form-group">
+              <label>Arancel</label>
+              <input type="text" id="txtArancel" class="form-control formatNum" placeholder="Arancel 0" required>
+            </div>
+            <div class="form-group">
+              <label>Área</label>
+              <input type="text" id="txtArea" class="form-control" placeholder="Area 0.0000" required>
+            </div>
+            <div class="form-group">
+              <label>Construccion</label>
+              <input type="text" id="txtConst" class="form-control formatNum" placeholder="Construccion S/." required>
+            </div>
+            <div class="form-group">
+              <label>Obra Complementaria</label>
+              <input type="text" id="txtOcompl" class="form-control formatNum" placeholder="Obra Complementaria S/." required>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radiosTerreno" checked value="rustico">
+                Rustico
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radiosTerreno" value="urbano">
+                Urbano
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="" id="btnAgregar" class="btn btn-form btn-primary">Agregar</button>
+            </div>
+          </form>
+
+          <table class="table-striped" class="my-table">
+            <thead>
+              <caption id="totTabla">Total</caption>
+              <tr>
+                <th>Arancel</th>
+                <th>Area</th>
+                <th>Construccion</th>
+                <th>Complementaria</th>
+                <th>Tipo</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="destinoFila">
+              
+            </tbody>
+          </table>
+
+        </div>            
+      </div>   
+    </div>
+    <script src="./fisca-window/fiscalizacion-frontend.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
