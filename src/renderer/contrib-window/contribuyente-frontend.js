@@ -100,7 +100,8 @@ const register = () => {
       commanQuery.params,
       "contribuyente"
     );
-    console.log(result)
+    //console.log(result)
+    ui.clearElements(form)
     //console.log(commanQuery.query)
     //console.log(commanQuery.params)
     //reload(result);

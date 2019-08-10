@@ -222,6 +222,23 @@ class UI {
     return bool;
   }
 
+  clearElements(form){
+    for (let i = 0; i < form.elements.length; i++) {
+      let elemento = form.elements[i];
+      if (elemento.type == "text" ) elemento.value="";
+      if (elemento.type == "radio") elemento.checked = false;
+      if (elemento.type == "checkbox") elemento.checked = 0;
+      if (elemento.type == "hidden") elemento.value= 0;
+      if (
+        elemento.type != "hidden" &&
+        elemento.type != "text" &&
+        elemento.type != "radio" &&
+        elemento.type != "checkbox"
+      ) {
+        elemento.value = 0;
+      }
+    }
+  }
   valuesElements(elements) {
     let datos = [];
     for (let i = 0; i < elements.length; i++) {
