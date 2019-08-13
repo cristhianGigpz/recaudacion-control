@@ -221,7 +221,15 @@ class UI {
         }*/
     return bool;
   }
-
+  initFocus(form){
+    for (let i = 0; i < form.elements.length; i++) {
+      let elemento = form.elements[i];
+      if (elemento.type == "text" ){
+        elemento.focus()
+        break;
+      }
+    }
+  }
   clearElements(form){
     for (let i = 0; i < form.elements.length; i++) {
       let elemento = form.elements[i];

@@ -21,6 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   LoadData();
   closeRegistroContribuyente();
   register();
+  pasarFocus("form-contribuyente");
 });
 
 const closeRegistroContribuyente = () => {
@@ -120,6 +121,7 @@ const register = () => {
       "contribuyente"
     );
     ui.clearElements(form)
+    ui.initFocus(form)
     console.log('datos insertados !')
     //console.log(commanQuery.query)
     //console.log(commanQuery.params)
@@ -153,3 +155,16 @@ const cancelUpdate = () => {
     //clear();
   });
 };
+
+function pasarFocus(form){
+  let formulario = document.getElementById(form)
+  const inputs = formulario.querySelectorAll("input[type='text']")
+  console.log(inputs)
+  inputs.forEach(item => {
+    item.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13){
+        alert('enter')
+      }
+    })
+  })
+}
