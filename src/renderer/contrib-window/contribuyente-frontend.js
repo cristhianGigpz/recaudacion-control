@@ -91,7 +91,7 @@ const register = () => {
       let data = {
         nombre_razon_social: valuesForm[0],
         tipodoc: valuesForm[1],
-        numerodoc: parseInt(valuesForm[2]),
+        numerodoc: valuesForm[2],
         idurb: parseInt(valuesForm[3]),
         direccion: valuesForm[4],
         numero: parseInt(valuesForm[9]),
@@ -160,11 +160,20 @@ function pasarFocus(form){
   let formulario = document.getElementById(form)
   const inputs = formulario.querySelectorAll("input[type='text']")
   console.log(inputs)
-  inputs.forEach(item => {
-    item.addEventListener('keyup', (e) => {
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('keyup', (e) => {
       if (e.keyCode === 13){
-        alert('enter')
+        //alert('enter: ' + e.target.id)
+        i < inputs.length ? inputs[i+1].focus() : inputs[i].focus()
       }
     })
-  })
+  }
+  /* inputs.forEach((item, key) => {
+    //console.log("datos "+ key)
+    item.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13){
+        alert('enter: ' + e.target.id)
+      }
+    })
+  }) */
 }
