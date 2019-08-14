@@ -1,5 +1,6 @@
 import { ipcRenderer } from "electron";
 import UI from "./main-window/ui";
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/index"
 const ui = new UI();
 /* const { Client, Pool } = require("pg");
 require("custom-env").env("config");
@@ -21,7 +22,7 @@ window.addEventListener("DOMContentLoaded", () => {
   LoadData();
   closeRegistroContribuyente();
   register();
-  pasarFocus("form-contribuyente");
+  ui.pasarFocus("form-contribuyente");
 });
 
 const closeRegistroContribuyente = () => {
@@ -41,7 +42,8 @@ const LoadData = () => {
  * Lista los datos de la tabla
  */
 const listGrilla = () => {
-  const dep = ui.loadGetData("contribuyente"); //CONECTA CON LA BD Y TRAE DATOS DE TABLA
+  //const dep = ui.loadGetData("contribuyente"); //CONECTA CON LA BD Y TRAE DATOS DE TABLA
+  const dep = loadGetData("contribuyente");
   dep.then(e => {
     //LoaderData(e);
   });
@@ -110,12 +112,13 @@ const register = () => {
         valortotalpredio: parseInt(valuesForm[15]),
         baseimponiblea: parseInt(valuesForm[16])
       };
+      
     const commanQuery =
       cod === 0
-        ? ui.createInsertQuery("contribuyente", data)
-        : ui.createUpdateQuery("contribuyente", data, "idcontribuyente", cod);
+        ? createInsertQuery("contribuyente", data)
+        : createUpdateQuery("contribuyente", data, "idcontribuyente", cod);
     
-    const result = ui.executeQuery(
+    const result = executeQuery(
       commanQuery.query,
       commanQuery.params,
       "contribuyente"
@@ -137,14 +140,12 @@ contribuyente-frontend.js? [sm]:58 (20) ["CRISTHIAN JOEL ACEVEDO TIPIAN", "DNI"
 };
 
 //clear en ui//
-
 const reload = element => {
   element.then(e => {
     listGrilla();
     //clear();
   });
 };
-
 /**
  * Cancela la actualizacion de los datos
  */
@@ -156,24 +157,3 @@ const cancelUpdate = () => {
   });
 };
 
-function pasarFocus(form){
-  let formulario = document.getElementById(form)
-  const inputs = formulario.querySelectorAll("input[type='text']")
-  console.log(inputs)
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener('keyup', (e) => {
-      if (e.keyCode === 13){
-        //alert('enter: ' + e.target.id)
-        i < inputs.length ? inputs[i+1].focus() : inputs[i].focus()
-      }
-    })
-  }
-  /* inputs.forEach((item, key) => {
-    //console.log("datos "+ key)
-    item.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13){
-        alert('enter: ' + e.target.id)
-      }
-    })
-  }) */
-}

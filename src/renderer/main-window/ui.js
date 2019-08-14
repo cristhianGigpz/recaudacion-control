@@ -247,6 +247,30 @@ class UI {
       }
     }
   }
+
+  pasarFocus(form){
+    let formulario = document.getElementById(form);
+    const inputs = formulario.querySelectorAll("input[type='text']");
+    console.log(inputs);
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].addEventListener('keyup', (e) => {
+        if (e.keyCode === 13){
+          //alert('enter: ' + e.target.id)
+          //console.log(i);
+          i < inputs.length - 1 ? inputs[i+1].focus() : inputs[0].focus()
+        }
+      })
+    }
+    /* inputs.forEach((item, key) => {
+      //console.log("datos "+ key)
+      item.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13){
+          alert('enter: ' + e.target.id)
+        }
+      })
+    }) */
+  }
+  
   valuesElements(elements) {
     let datos = [];
     for (let i = 0; i < elements.length; i++) {
