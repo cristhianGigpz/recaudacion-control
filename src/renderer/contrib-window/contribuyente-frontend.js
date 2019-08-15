@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import UI from "./main-window/ui";
-import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/index"
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/connect"
 const ui = new UI();
 /* const { Client, Pool } = require("pg");
 require("custom-env").env("config");

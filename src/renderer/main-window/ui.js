@@ -76,7 +76,7 @@ class UI {
   pasarFocus(form){
     let formulario = document.getElementById(form);
     const inputs = formulario.querySelectorAll("input[type='text']");
-    console.log(inputs);
+    //console.log(inputs);
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].addEventListener('keyup', (e) => {
         if (e.keyCode === 13){
