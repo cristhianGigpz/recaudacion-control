@@ -106,6 +106,24 @@ function createMenu() {
     },
     {
       label: "COACTIVO"
+    },
+    {
+      label: "MANTENIMIENTO",
+      submenu: [
+        {
+          label: "Partida Presupuestal",
+          accelerator: "",
+          click() {
+            openWindow(
+              800,
+              300,
+              "partida presupuestal",
+              true,
+              "partidapresupuesto"
+            );
+          }
+        }
+      ]
     }
   ];
   const menu = remote.Menu.buildFromTemplate(template);

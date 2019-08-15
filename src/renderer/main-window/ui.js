@@ -23,10 +23,7 @@ class UI {
       });
     }
   }
-  /**
-   *
-   * @param {*} options
-   */
+  
   showDialog(options) {
     ipcRenderer.send("showMessageBox", options);
   }
