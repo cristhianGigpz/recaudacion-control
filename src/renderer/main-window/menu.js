@@ -116,7 +116,7 @@ function createMenu() {
           click() {
             openWindow(
               1000,
-              300,
+              600,
               "partida presupuestal",
               true,
               "partidapresupuesto"

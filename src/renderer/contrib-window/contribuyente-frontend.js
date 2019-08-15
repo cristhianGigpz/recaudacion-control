@@ -1,4 +1,3 @@
-import { ipcRenderer } from "electron";
 import UI from "./main-window/ui";
 import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/connect"
 const ui = new UI();
