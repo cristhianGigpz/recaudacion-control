@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Partida Presupuestal</title>
+  <link rel="stylesheet" href="../assets/css/photon.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+    
+</head>
+<body class="_bln">
+	<div class="window">
+		<header class="toolbar toolbar-header">
+			<h1 class="title">PARTIDA PRESUPUESTAL </h1>
+		</header>
+		<div class="window-content" id="destino">
+			<div class="container-fluid">
+				<div class="card">
+					<div class="header">
+						<h4>Ingreso de Partidas</h4>
+					</div>
+					<div class="content">
+						<form id="form-partida">
+							<div class="form-group">
+								<div class="col-4 space-right">
+									<label>Codigo presupuestal</label>
+									<input type="text" class="form-control" placeholder="codigo" id="codigop">
+								</div>
+								<div class="col-4 space-left">
+									<label>concepto</label>
+									<input type="text" class="form-control" placeholder="concepto" id="concepto">
+								</div>
+								<div class="col-4 space-left">
+									<label>importe</label>
+									<input type="text" class="form-control" placeholder="importe" id="importe">
+								</div>
+								<div class="col-4 space-left">
+									<label>Periodo</label>
+									<input type="text" class="form-control" placeholder="periodo" id="periodo">
+								</div>
+              </div>
+              
+							<div class="separator">
+								<p>Operaciones</p>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="toolbar toolbar-footer">
+			<div class="toolbar-actions">
+				<button id="btn-cancelar" class="btn btn-default">Cancelar</button>
+				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
+			</div>
+		</footer>
+	</div>
+	<!--<script src="./contrib-window/contribuyente-frontend.js" type="text/javascript" charset="utf-8"></script> -->
+</body>
+
+</html>
