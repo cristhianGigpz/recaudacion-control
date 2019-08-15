@@ -13,7 +13,6 @@ class UI {
     }
   }
 
-  
   openWindows(element, ancho, alto, title, file) {
     const btn = document.getElementById(element);
     if (btn) {

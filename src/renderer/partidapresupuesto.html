@@ -22,24 +22,28 @@
 					<div class="content">
 						<form id="form-partida">
 							<div class="form-group">
-								<div class="col-4 space-right">
+								<div class="col-3 space-left">
 									<label>Codigo presupuestal</label>
-									<input type="text" class="form-control" placeholder="codigo" id="codigop">
+									<input type="text" class="form-control" placeholder="1.1.1.1.1" id="codigop">
 								</div>
-								<div class="col-4 space-left">
+								<div class="col-3 space-left">
 									<label>concepto</label>
 									<input type="text" class="form-control" placeholder="concepto" id="concepto">
 								</div>
-								<div class="col-4 space-left">
-									<label>importe</label>
-									<input type="text" class="form-control" placeholder="importe" id="importe">
+								<div class="col-3 space-left">
+									<label>importe tupa</label>
+									<input type="text" class="form-control" placeholder="ejemplo %0.45" id="importe">
 								</div>
-								<div class="col-4 space-left">
+								<div class="col-3 space-left">
+									<label>descripcion tupa</label>
+									<input type="text" class="form-control" placeholder="desc_tupa" id="desct">
+								</div>
+								<div class="col-3 space-left">
 									<label>Periodo</label>
-									<input type="text" class="form-control" placeholder="periodo" id="periodo">
+									<input type="text" class="form-control" placeholder="periodo" id="periodo" value="2019">
 								</div>
-              </div>
-              
+              				</div>
+            
 							<div class="separator">
 								<p>Operaciones</p>
 							</div>
@@ -51,12 +55,12 @@
 		</div>
 		<footer class="toolbar toolbar-footer">
 			<div class="toolbar-actions">
-				<button id="btn-cancelar" class="btn btn-default">Cancelar</button>
+				<button id="cancel-button" class="btn btn-default">Cancelar</button>
 				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
 			</div>
 		</footer>
 	</div>
-	<!--<script src="./contrib-window/contribuyente-frontend.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="./partida-window/partida-frontend.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

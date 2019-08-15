@@ -115,7 +115,7 @@ function createMenu() {
           accelerator: "",
           click() {
             openWindow(
-              800,
+              1000,
               300,
               "partida presupuestal",
               true,

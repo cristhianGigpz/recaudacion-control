@@ -49,26 +49,10 @@ function limpiarInputs(elementoPadre, tipo){
   inputs[0].focus()
 }
 
-function pasarFocus(container){
-  const elemento = document.getElementById(container)
-  let inputs = elemento.querySelectorAll(".form-control")
-  alert(inputs.length)
-  /*for (let i = 0; i < inputs.length; i++) {
-    if (inputs[i].type === 'text'){
-      inputs[i].addEventListener('keydown', inputCharacters);
-    } 
-  }*/
-}
-// function inputCharacters(event) {
-//   if (event.keyCode == 13) {
-//     document.getElementById('inputSecond').focus();
-//   }
-// }
 
 module.exports = {
     crearFila,
     showDialog,
     operacion,
-    limpiarInputs,
-    pasarFocus
+    limpiarInputs
 }

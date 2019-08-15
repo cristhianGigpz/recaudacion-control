@@ -72,7 +72,7 @@ function openWindow(ancho, alto, titulo, center = true, plantilla) {
     title: titulo,
     center: center,
     parent: mainWindow,
-    modal: true,
+    modal: false,
     show: false,
     frame: false
   });
