@@ -1,5 +1,6 @@
 import {ipcRenderer } from 'electron';
 import UI from './main-window/ui'
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId, loadDataJoinDistrito } from "../bd/connect"
 const ui = new UI();
 /**
  * Carga todos los eventos al formulario
@@ -14,7 +15,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  * Inicializa los datos en el formulario
  */
 const LoadData =()=>{
-    const element = ui.loadGetData('provincia');
+    const element = loadGetData('provincia');
     document.getElementById('selectProv').innerHTML +=`<option value='0'>seleccione distrito</option>`;
     element.then((items)=>{
         items.forEach(e => {
@@ -29,7 +30,7 @@ const LoadData =()=>{
  * Lista los datos de la tabla
  */
 const listGrilla =()=>{
-    const prov = ui.loadDataJoinDistrito();
+    const prov = loadDataJoinDistrito();
     prov.then((e)=>{LoaderData(e)})
 }
 
@@ -51,9 +52,9 @@ const register =()=>{
         }
         let data = {codigo:codigo , nomDistrito:dist,abreviatura:abr,idprovincia:strProv}
         const commanQuery = (cod === 0)
-            ?  ui.createInsertQuery('distrito',data)
-            : ui.createUpdateQuery('distrito',data,'iddistrito',cod);
-        const result = ui.executeQuery(commanQuery.query,commanQuery.params,'distrito');
+            ? createInsertQuery('distrito',data)
+            : createUpdateQuery('distrito',data,'iddistrito',cod);
+        const result = executeQuery(commanQuery.query,commanQuery.params,'distrito');
         reload(result);
         document.getElementById('btn-dist').innerText ="Guardar";
     })
@@ -98,7 +99,7 @@ const cancelUpdate=()=>{
  * @param {this} element 
  */
 const btnEditar = (element)=>{
-    const fullData = ui.loadGetDataId('distrito','iddistrito',element.id);
+    const fullData = loadGetDataId('distrito','iddistrito',element.id);
     document.getElementById("btn-cancelar").classList.remove("u-none");
     fullData.then((items)=>{
         document.getElementById('btn-dist').innerText ="Actualizar";
@@ -125,13 +126,13 @@ const btnDelete = (element)=>{
         type : "question",
        }
     ui.showDialog(options);
-    let data = {flat:'0'}
-    const commanQuery = ui.createUpdateQuery('distrito',data,'iddistrito',id);
+    let data = {estado: '0'}
+    const commanQuery = createUpdateQuery('distrito',data,'iddistrito',id);
     ipcRenderer.on('MessageBox',(event,res)=>{
         //res = 0 -> eliminar el registro
         //res = 1 -> no elimina nada
         if(res === 0){
-           const result = ui.executeQuery(commanQuery.query,commanQuery.params,'distrito');
+           const result = executeQuery(commanQuery.query,commanQuery.params,'distrito');
             reload(result);
         }
     });

@@ -83,11 +83,82 @@ async function loadGetData(table) {
     };
   }
 
+  /******************************************************** */
+  async function loadDataJoin() {
+    const listData = connection
+      .query(
+        `select * from provincia a
+        inner join departamento b 
+        on a.iddepartamento = b.iddepartamento where a.estado=1;`
+      )
+      .then(res => {
+        const loadData = res.rows.length > 0 ? res.rows : [];
+        return loadData;
+      })
+      .catch(e => console.log(e));
+
+    return await listData;
+  }
+  async function loadDataJoinDistrito() {
+    const listData = connection
+      .query(
+        `select * from distrito a
+        inner join provincia b 
+        on a.idprovincia = b.idprovincia
+        inner join departamento c
+        on b.iddepartamento = c.iddepartamento where a.estado=1;`
+      )
+      .then(res => {
+        const loadData = res.rows.length > 0 ? res.rows : [];
+        return loadData;
+      })
+      .catch(e => console.log(e));
+
+    return await listData;
+  }
+
+  async function loadDataJoinUbanisacion() {
+    const listData = connection
+      .query(
+        `select 
+        a.idurb,a.codigo,
+        a.nomurbanisacion,a.abreviatura,a.iddistrito,b.nomdistrito from urbanisacion a
+        inner join distrito b
+        on a.iddistrito = b.iddistrito where a.estado=1;`
+      )
+      .then(res => {
+        const loadData = res.rows.length > 0 ? res.rows : [];
+        return loadData;
+      })
+      .catch(e => console.log(e));
+
+    return await listData;
+  }
+
+  async function loadDataJoinContribuyente() {
+    const listContribuyente = connection
+      .query(
+        `select b.idurb,b.nomurbanisacion,a.* from contribuyente a
+            inner join urbanisacion b 
+            on a.idurb = b.idurb
+            where a.estado = 1;`
+      )
+      .then(resp => {
+        const loadContrib = resp.rows.length > 0 ? resp.rows : [];
+        return loadContrib;
+      })
+      .catch(e => console.log(e));
+    return await listContribuyente;
+  }
+
   module.exports = {
       loadGetData,
       loadGetDataId,
       executeQuery,
       createInsertQuery,
-      createUpdateQuery
+      createUpdateQuery,
+      loadDataJoin,
+      loadDataJoinDistrito,
+      loadDataJoinUbanisacion
   }
   

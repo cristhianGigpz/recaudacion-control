@@ -1,5 +1,6 @@
 import { ipcRenderer } from "electron";
 import UI from "./main-window/ui";
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId } from "../bd/connect"
 const ui = new UI();
 
 /**
@@ -25,7 +26,7 @@ const LoadData = () => {
  * Lista los datos de la tabla
  */
 const listGrilla = () => {
-  const dep = ui.loadGetData("departamento");
+  const dep = loadGetData("departamento");
   dep.then(e => {
     LoaderData(e);
   });
@@ -68,12 +69,12 @@ const register = () => {
     let data = { nombre_departamento: _name };
     const commanQuery =
       cod === 0
-        ? ui.createInsertQuery("departamento", data)
-        : ui.createUpdateQuery("departamento", data, "iddepartamento", cod);
+        ? createInsertQuery("departamento", data)
+        : createUpdateQuery("departamento", data, "iddepartamento", cod);
     //console.log(commanQuery.query)
     //console.log(commanQuery.params)
     //return false;
-    const result = ui.executeQuery(
+    const result = executeQuery(
       commanQuery.query,
       commanQuery.params,
       "departamento"
@@ -122,7 +123,7 @@ const cancelUpdate = () => {
  * @param {this} element
  */
 const btnEditar = element => {
-  const fullData = ui.loadGetDataId(
+  const fullData = loadGetDataId(
     "departamento",
     "iddepartamento",
     element.id
@@ -150,7 +151,7 @@ const btnDelete = element => {
   };
   ui.showDialog(options);
   let data = { estado: "0" };
-  const commanQuery = ui.createUpdateQuery(
+  const commanQuery = createUpdateQuery(
     "departamento",
     data,
     "iddepartamento",
@@ -160,7 +161,7 @@ const btnDelete = element => {
     //res = 0 -> eliminar el registro
     //res = 1 -> no elimina nada
     if (res === 0) {
-      const result = ui.executeQuery(
+      const result = executeQuery(
         commanQuery.query,
         commanQuery.params,
         "departamento"

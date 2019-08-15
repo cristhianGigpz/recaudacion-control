@@ -1,5 +1,6 @@
 import {ipcRenderer } from 'electron';
 import UI from './main-window/ui'
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId, loadDataJoin } from "../bd/connect"
 const ui = new UI();
 
 /**
@@ -15,7 +16,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  * Inicializa los datos en el formulario
  */
 const LoadData =()=>{
-    const element = ui.loadGetData('departamento');
+    const element = loadGetData('departamento');
     document.getElementById('selectDep').innerHTML +=`<option value='0'>seleccione departamento</option>`;
     element.then((items)=>{
         items.forEach(e => {
@@ -30,7 +31,7 @@ const LoadData =()=>{
  * Lista los datos de la tabla
  */
 const listGrilla =()=>{
-    const prov = ui.loadDataJoin();
+    const prov = loadDataJoin();
     prov.then((e)=>{LoaderData(e)})
 }
 
@@ -50,9 +51,9 @@ const register =()=>{
         }
         let data = {nombre_provincia:prov , idDepartamento:strDep}
         const commanQuery = (cod === 0) 
-            ?  ui.createInsertQuery('provincia',data) 
-            : ui.createUpdateQuery('provincia',data,'idprovincia',cod);
-        const result = ui.executeQuery(commanQuery.query,commanQuery.params,'provincia');
+            ? createInsertQuery('provincia',data) 
+            : createUpdateQuery('provincia',data,'idprovincia',cod);
+        const result = executeQuery(commanQuery.query,commanQuery.params,'provincia');
         reload(result);
     });
 }
@@ -94,7 +95,7 @@ const cancelUpdate=()=>{
  * @param {this} element 
  */
 const btnEditar = (element)=>{
-    const fullData = ui.loadGetDataId('provincia','idprovincia',element.id);
+    const fullData = loadGetDataId('provincia','idprovincia',element.id);
     document.getElementById("btn-cancelar").classList.remove("u-none");
     fullData.then((items)=>{
         document.getElementById('cod').value = items[0].idprovincia;
@@ -118,13 +119,13 @@ const btnDelete = (element)=>{
         type : "question",
        }
     ui.showDialog(options);
-    let data = {flat:'0'}
-    const commanQuery = ui.createUpdateQuery('provincia',data,'idprovincia',id);
+    let data = {estado: '0'}
+    const commanQuery = createUpdateQuery('provincia',data,'idprovincia',id);
     ipcRenderer.on('MessageBox',(event,res)=>{
         //res = 0 -> eliminar el registro
         //res = 1 -> no elimina nada
         if(res === 0){
-           const result = ui.executeQuery(commanQuery.query,commanQuery.params,'provincia');
+           const result = executeQuery(commanQuery.query,commanQuery.params,'provincia');
             reload(result);
         }
     });

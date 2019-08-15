@@ -1,5 +1,6 @@
 import {ipcRenderer } from 'electron';
 import UI from './main-window/ui'
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId, loadDataJoinUbanisacion } from "../bd/connect"
 const ui = new UI();
 /**
  * Carga todos los eventos al formulario
@@ -14,7 +15,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  * Inicializa los datos en el formulario
  */
 const LoadData =()=>{
-    const element = ui.loadGetData('distrito');
+    const element = loadGetData('distrito');
     document.getElementById('selectDist').innerHTML +=`<option value='0'>seleccione distrito</option>`;
     element.then((items)=>{
         items.forEach(e => {
@@ -29,7 +30,7 @@ const LoadData =()=>{
  * Lista los datos de la tabla
  */
 const listGrilla =()=>{
-    const prov = ui.loadDataJoinUbanisacion();
+    const prov = loadDataJoinUbanisacion();
     prov.then((e)=>{LoaderData(e)})
 }
 
@@ -51,9 +52,9 @@ const register =()=>{
         }
         let data = {codigo:cod , nomUrbanisacion:urb,abreviatura:abr,idDistrito:strDist}
         const commanQuery = (id === 0) 
-            ?  ui.createInsertQuery('urbanisacion',data) 
-            : ui.createUpdateQuery('urbanisacion',data,'idurb',id);
-        const result = ui.executeQuery(commanQuery.query,commanQuery.params,'urbanisacion');
+            ? createInsertQuery('urbanisacion',data) 
+            : createUpdateQuery('urbanisacion',data,'idurb',id);
+        const result = executeQuery(commanQuery.query,commanQuery.params,'urbanisacion');
         reload(result);
         document.getElementById('btn-urb').innerText ="Guardar";
 
@@ -98,7 +99,7 @@ const cancelUpdate=()=>{
  * @param {this} element 
  */
 const btnEditar = (element)=>{
-    const fullData = ui.loadGetDataId('urbanisacion','idurb',element.id);
+    const fullData = loadGetDataId('urbanisacion','idurb',element.id);
     document.getElementById("btn-cancelar").classList.remove("u-none");
     fullData.then((items)=>{
         document.getElementById('btn-urb').innerText ="Actualizar";
@@ -124,13 +125,13 @@ const btnDelete = (element)=>{
         type : "question",
        }
     ui.showDialog(options);
-    let data = {flat:'0'}
-    const commanQuery = ui.createUpdateQuery('urbanisacion',data,'idurb',id);
+    let data = {estado: '0'}
+    const commanQuery = createUpdateQuery('urbanisacion',data,'idurb',id);
     ipcRenderer.on('MessageBox',(event,res)=>{
         //res = 0 -> eliminar el registro
         //res = 1 -> no elimina nada
         if(res === 0){
-            const result = ui.executeQuery(commanQuery.query,commanQuery.params,'urbanisacion');
+            const result = executeQuery(commanQuery.query,commanQuery.params,'urbanisacion');
             reload(result);
         }
     });
