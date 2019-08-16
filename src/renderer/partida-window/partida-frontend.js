@@ -18,10 +18,6 @@ function cancelButton () {
 /************************************************************** */
 
 window.addEventListener("DOMContentLoaded", () => {
-  /* connection.connect(err => {
-    if (err) return err;
-  });
- */
   LoadData();
   register();
   ui.pasarFocus("form-partida");
@@ -81,9 +77,9 @@ const register = () => {
       //alert('process !!')
       let data = {
         codigo_presupuestal: valuesForm[0],
-        concepto: valuesForm[1],
+        concepto: valuesForm[1].toUpperCase(),
         importe_tupa: parseFloat(valuesForm[2]),
-        desc_tupa: valuesForm[3],
+        desc_tupa: valuesForm[3].toUpperCase(),
         idperiodo: parseInt(valuesForm[4]),
         estado: 1
       };
@@ -108,17 +104,16 @@ const register = () => {
   });
 };
 
-const clear = () => {
+const initSave = () => {
   document.getElementById("cod").value = "0";
   document.getElementById("btn-cancelar").classList.add("u-none");
   document.getElementById("btn-guardar").innerText = "Guardar";
 };
 
-//clear en ui//
 const reload = element => {
   element.then(e => {
     listGrilla();
-    clear();
+   initSave();
   });
 };
 /**
