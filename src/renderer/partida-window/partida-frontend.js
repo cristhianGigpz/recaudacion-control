@@ -113,7 +113,7 @@ const initSave = () => {
 const reload = element => {
   element.then(e => {
     listGrilla();
-   initSave();
+    initSave();
   });
 };
 /**

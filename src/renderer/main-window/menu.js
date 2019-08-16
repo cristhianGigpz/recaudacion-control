@@ -31,30 +31,6 @@ function createMenu() {
       label: "RENTAS",
       submenu: [
         {
-          label: "Departamento",
-          click() {
-            openWindow(595, 455, "Departamento", true, "departamento");
-          }
-        },
-        {
-          label: "Provincia",
-          click() {
-            openWindow(595, 455, "Provincia", true, "provincia");
-          }
-        },
-        {
-          label: "Distrito",
-          click() {
-            openWindow(745, 530, "Distrito", true, "distrito");
-          }
-        },
-        {
-          label: "Urbanisacion",
-          click() {
-            openWindow(745, 530, "Urbanisacion", true, "urbanisacion");
-          }
-        },
-        {
           label: "Contribuyente",
           accelerator: "CmdOrCtrl+T",
           click() {
@@ -121,6 +97,30 @@ function createMenu() {
               true,
               "partidapresupuesto"
             );
+          }
+        },
+        {
+          label: "Departamento",
+          click() {
+            openWindow(595, 455, "Departamento", true, "departamento");
+          }
+        },
+        {
+          label: "Provincia",
+          click() {
+            openWindow(595, 455, "Provincia", true, "provincia");
+          }
+        },
+        {
+          label: "Distrito",
+          click() {
+            openWindow(745, 530, "Distrito", true, "distrito");
+          }
+        },
+        {
+          label: "Urbanisacion",
+          click() {
+            openWindow(745, 530, "Urbanisacion", true, "urbanisacion");
           }
         }
       ]
