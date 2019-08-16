@@ -1,89 +1,148 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Partida Presupuestal</title>
-  <link rel="stylesheet" href="../assets/css/photon.min.css">
-  <link rel="stylesheet" href="../assets/css/main.css">
-    
-</head>
-<body class="_bln">
-	<div class="window">
-		<header class="toolbar toolbar-header">
-			<h1 class="title">PARTIDA PRESUPUESTAL </h1>
-		</header>
-		<div class="window-content" id="destino">
-			<div class="container-fluid">
-				<div class="card">
-					<div class="header">
-						<h4>Ingreso de Partidas</h4>
-					</div>
-					<div class="content">
-						<form id="form-partida">
-							<div class="form-group">
-								<div class="col-3 space-left">
-									<label>Codigo presupuestal</label>
-									<input type="text" class="form-control" placeholder="1.1.1.1.1" id="codigop" value="1.1.1.1.1">
-								</div>
-								<div class="col-3 space-left">
-									<label>concepto</label>
-									<input type="text" class="form-control" placeholder="concepto" id="concepto" value="NINGUNO">
-								</div>
-								<div class="col-3 space-left">
-									<label>importe tupa</label>
-									<input type="text" class="form-control" placeholder="ejemplo %0.45" id="importe">
-								</div>
-								<div class="col-3 space-left">
-									<label>descripcion tupa</label>
-									<input type="text" class="form-control" placeholder="Denomincion TUPA" id="desct">
-								</div>
-								<div class="col-3 space-left">
-									<label>Periodo</label>
-									<input type="text" class="form-control" placeholder="periodo" id="periodo" value="2019">
-									<input type="hidden" id="cod" value="0">
-								</div>
-              				</div>
-            
-							<div class="separator">
-								<p>Operaciones</p>
-							</div>
-							
-						</form>
-					</div>
-				</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Partida Presupuestal</title>
+    <link rel="stylesheet" href="../assets/css/photon.min.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body class="_bln">
+    <div class="window">
+      <header class="toolbar toolbar-header">
+        <h1 class="title">Partida Presupuestal</h1>
 
-				<div class="card">
-                    <div class="header">
-                        <h4>Partidas Presupuestales</h4>
-                    </div>
-                    <div class="padded-more">
-                        <table class="table-striped">
-                            <thead>
-                                <tr>
-                                    <th>CODIGO PRESUPUESTAL</th>
-                                    <th>CONCEPTO</th>
-																		<th>IMPORTE TUPA</th>
-																		<th>DESCRIP. TUPA</th>
-																		<th>PERIODO</th>
-                                </tr>
-                            </thead>
-                            <tbody id="load-dep"></tbody>
-                        </table>
-                    </div>
-                    <iframe id="viewpd" src="" frameborder="0"></iframe>
+        <div class="toolbar-actions">
+          <div class="btn-group">
+            <button class="btn btn-default">
+              <span class="icon icon-home"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-folder"></span>
+            </button>
+            <button class="active btn btn-default">
+              <span class="icon icon-search"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-popup"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-shuffle"></span>
+            </button>
+          </div>
+
+          <button class="btn btn-default">
+            <span class="icon icon-home icon-text"></span>
+            Filters
+          </button>
+        </div>
+      </header>
+      <div class="window-content" id="destino">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="header">
+              <h4>Ingreso de Partidas</h4>
+            </div>
+            <div class="content">
+              <form id="form-partida">
+                <div class="form-group">
+                  <div class="col-3 space-left">
+                    <label>Codigo presupuestal</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="1.1.1.1.1"
+                      id="codigop"
+                      value="1.1.1.1.1"
+                    />
+                  </div>
+                  <div class="col-3 space-left">
+                    <label>concepto</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="concepto"
+                      id="concepto"
+                      value="NINGUNO"
+                    />
+                  </div>
+                  <div class="col-3 space-left">
+                    <label>importe tupa %</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="ejemplo %0.45"
+                      id="importe"
+                    />
+                  </div>
+                  <div class="col-3 space-left">
+                    <label>descripcion tupa</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Denomincion TUPA"
+                      id="desct"
+                    />
+                  </div>
+                  <div class="col-3 space-left">
+                    <label>Periodo</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="periodo"
+                      id="periodo"
+                      value="2019"
+                    />
+                    <input type="hidden" id="cod" value="0" />
+                  </div>
                 </div>
-			</div>
-		</div>
-		<footer class="toolbar toolbar-footer">
-			<div class="toolbar-actions">
-				<button id="cancel-button" class="btn btn-default">Salir</button>
-				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
-            	<button class="btn btn-default u-none" id="btn-cancelar">Cancelar</button>
-			</div>
-		</footer>
-	</div>
-	<script src="./partida-window/partida-frontend.js" type="text/javascript" charset="utf-8"></script>
-</body>
 
+                <div class="separator">
+                  <p>Operaciones</p>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="header">
+              <h4>Partidas Presupuestales</h4>
+            </div>
+            <div class="padded-more">
+              <table class="table-striped">
+                <thead>
+                  <tr>
+                    <th>CODIGO PRESUPUESTAL</th>
+                    <th>CONCEPTO</th>
+                    <th>IMPORTE TUPA</th>
+                    <th>DESCRIP. TUPA</th>
+                    <th>PERIODO</th>
+                  </tr>
+                </thead>
+                <tbody id="load-dep"></tbody>
+              </table>
+            </div>
+            <iframe id="viewpd" src="" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <footer class="toolbar toolbar-footer">
+        <div class="toolbar-actions">
+          <button id="cancel-button" class="btn btn-default">Salir</button>
+          <button id="btn-guardar" class="btn btn-primary pull-right">
+            Guardar
+          </button>
+          <button class="btn btn-default u-none" id="btn-cancelar">
+            Cancelar
+          </button>
+        </div>
+      </footer>
+    </div>
+    <script
+      src="./partida-window/partida-frontend.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </body>
 </html>
