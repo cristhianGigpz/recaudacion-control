@@ -158,12 +158,35 @@
 						</form>
 					</div>
 				</div>
+
+				<div class="card">
+					<div class="header">
+						<h4>Contribuyentes</h4>
+					</div>
+					<div class="padded-more">
+						<table class="table-striped">
+							<thead>
+								<tr>
+									<th>RAZON SOCIAL</th>
+									<th>TIPO DOC</th>
+									<th>NUMERO DOC</th>
+									<th>DIRECCION</th>
+									<th>TELEFONO</th>
+								</tr>
+							</thead>
+							<tbody id="load-dep"></tbody>
+						</table>
+					</div>
+					<iframe id="viewpd" src="" frameborder="0"></iframe>
+				</div>
+				
 			</div>
 		</div>
 		<footer class="toolbar toolbar-footer">
 			<div class="toolbar-actions">
-				<button id="reg-contribuyente-end" class="btn btn-default">Cancelar</button>
+				<button id="reg-contribuyente-end" class="btn btn-default">Salir</button>
 				<button id="btn-guardar"  class="btn btn-primary pull-right">Guardar</button>
+				<button class="btn btn-default u-none" id="btn-cancelar">Cancelar</button>
 			</div>
 		</footer>
 	</div>

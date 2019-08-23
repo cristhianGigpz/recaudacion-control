@@ -1,30 +1,18 @@
 import UI from "./main-window/ui";
 import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/connect"
 const ui = new UI();
-/* const { Client, Pool } = require("pg");
-require("custom-env").env("config");
-const connection = new Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_BASEDATOS,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT
-}); */
-/**
+/*
  * Carga todos los eventos al formulario
  */
 window.addEventListener("DOMContentLoaded", () => {
-  /* connection.connect(err => {
-    if (err) return err;
-  });
- */
   LoadData();
-  closeRegistroContribuyente();
+  cancelButton();
   register();
   ui.pasarFocus("form-contribuyente");
+  cancelUpdate();
 });
 
-const closeRegistroContribuyente = () => {
+const cancelButton = () => {
   ui.closeFrom("reg-contribuyente-end");
   //connection.end();
 };
@@ -44,7 +32,7 @@ const listGrilla = () => {
   //const dep = ui.loadGetData("contribuyente"); //CONECTA CON LA BD Y TRAE DATOS DE TABLA
   const dep = loadGetData("contribuyente");
   dep.then(e => {
-    //LoaderData(e);
+    LoaderData(e);
   });
 };
 
@@ -52,14 +40,17 @@ const LoaderData = items => {
   let card = "";
   items.forEach(e => {
     card += `<tr>
-                <td>${e.iddepartamento}</td>
-                <td>${e.nombre_departamento}</td>
+                <td>${e.nombre_razon_social}</td>
+                <td>${e.tipodoc}</td>
+                <td>${e.numerodoc}</td>
+                <td>${e.direccion}</td>
+                <td>${e.telefono}</td>
                 <td>
                     <button id="${
-                      e.iddepartamento
+                      e.idpartida
                     }" class="btn-crud" onclick="btnEditar(this)"><span class="icon icon-pencil"></span></button>
                     <button id="${
-                      e.iddepartamento
+                      e.idpartida
                     }" class="btn-crud" onclick="btnDelete(this)"><span class="icon icon-trash"></span></button>
                 </td>
             </tr>`;
@@ -124,10 +115,8 @@ const register = () => {
     );
     ui.clearElements(form)
     ui.initFocus(form)
-    console.log('datos insertados !')
-    //console.log(commanQuery.query)
-    //console.log(commanQuery.params)
-    //reload(result);
+    //console.log('datos insertados !')
+    reload(result);
    }else {
     alert("inserte todos los datos !!!");
   }
@@ -138,11 +127,16 @@ contribuyente-frontend.js? [sm]:58 (20) ["CRISTHIAN JOEL ACEVEDO TIPIAN", "DNI"
   });
 };
 
-//clear en ui//
+const initSave = () => {
+  document.getElementById("cod").value = "0";
+  document.getElementById("btn-cancelar").classList.add("u-none");
+  document.getElementById("btn-guardar").innerText = "Guardar";
+};
+
 const reload = element => {
   element.then(e => {
     listGrilla();
-    //clear();
+    initSave();
   });
 };
 /**
@@ -153,6 +147,55 @@ const cancelUpdate = () => {
     e.preventDefault();
     document.getElementById("btn-cancelar").classList.add("u-none");
     //clear();
+  });
+};
+
+const btnEditar = element => {
+  const fullData = loadGetDataId(
+    "contribuyente",
+    "idcontribuyente",
+    element.id
+  );
+  document.getElementById("btn-cancelar").classList.remove("u-none");
+  fullData.then(items => {
+    document.getElementById("cod").value = items[0].idcontribuyente;
+    document.getElementById("codigop").value = items[0].codigo_presupuestal;
+    document.getElementById("concepto").value = items[0].concepto;
+    document.getElementById("importe").value = items[0].importe_tupa;
+    document.getElementById("desct").value = items[0].desc_tupa;
+    document.getElementById("periodo").value = items[0].idperiodo;
+    document.getElementById("btn-guardar").innerText = "Actualizar";
+  });
+};
+
+const btnDelete = element => {
+  let id = element.id;
+  let options = {
+    title: "Eliminar Registro",
+    buttons: ["Si", "No"],
+    message: "Eliminar Registro?",
+    detail: "Al eliminar no se puede recuperar",
+    type: "question"
+  };
+  ui.showDialog(options);
+  let data = { estado: "0" };
+  const commanQuery = createUpdateQuery(
+    "contribuyente",
+    data,
+    "idcontribuyente",
+    id
+  );
+  ipcRenderer.on("MessageBox", (event, res) => {
+    //res = 0 -> eliminar el registro
+    //res = 1 -> no elimina nada
+    if (res === 0) {
+      const result = executeQuery(
+        commanQuery.query,
+        commanQuery.params,
+        "contribuyente"
+      );
+      reload(result);
+    }
   });
 };
 

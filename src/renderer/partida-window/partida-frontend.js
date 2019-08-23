@@ -3,26 +3,20 @@ import UI from "./main-window/ui";
 import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId } from "../bd/connect"
 const ui = new UI();
 
-window.addEventListener('load', () => {
-  cancelButton()
-  //testConnection()
-})
-
-function cancelButton () {
-  const cancelButton = document.getElementById('cancel-button')
-  cancelButton.addEventListener('click', () => {
-    const prefsWindow = remote.getCurrentWindow()
-    prefsWindow.close()
-  })
-}
 /************************************************************** */
 
 window.addEventListener("DOMContentLoaded", () => {
   LoadData();
+  cancelButton();
   register();
   ui.pasarFocus("form-partida");
   cancelUpdate()
 });
+
+const cancelButton = () => {
+  ui.closeFrom("cancel-button");
+  //connection.end();
+};
 
 const LoadData = () => {
   //const element = ui.loadGetData('departamento');
@@ -130,12 +124,12 @@ const cancelUpdate = () => {
 const btnEditar = element => {
   const fullData = loadGetDataId(
     "partidapresupuestal",
-    "idpartida",
+    "idpartidapresupuestal",
     element.id
   );
   document.getElementById("btn-cancelar").classList.remove("u-none");
   fullData.then(items => {
-    document.getElementById("cod").value = items[0].idpartida;
+    document.getElementById("cod").value = items[0].idpartidapresupuestal;
     document.getElementById("codigop").value = items[0].codigo_presupuestal;
     document.getElementById("concepto").value = items[0].concepto;
     document.getElementById("importe").value = items[0].importe_tupa;

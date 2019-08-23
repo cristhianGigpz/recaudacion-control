@@ -15,7 +15,7 @@ async function loadGetData(table) {
       if (err) return err;
     });
     const listData = connection
-      .query(`SELECT * FROM ${table} WHERE estado = $1`, [1])
+      .query(`SELECT * FROM ${table} WHERE estado = $1 ORDER BY id${table} desc LIMIT 10`, [1])
       .then(res => {
         const loadData = res.rows.length > 0 ? res.rows : [];
         return loadData;
@@ -89,7 +89,7 @@ async function loadGetData(table) {
       .query(
         `select * from provincia a
         inner join departamento b 
-        on a.iddepartamento = b.iddepartamento where a.estado=1;`
+        on a.iddepartamento = b.iddepartamento where a.estado=1 ORDER BY a.idprovincia desc;`
       )
       .then(res => {
         const loadData = res.rows.length > 0 ? res.rows : [];
@@ -105,8 +105,8 @@ async function loadGetData(table) {
         `select * from distrito a
         inner join provincia b 
         on a.idprovincia = b.idprovincia
-        inner join departamento c
-        on b.iddepartamento = c.iddepartamento where a.estado=1;`
+        inner join departamento c 
+        on b.iddepartamento = c.iddepartamento where a.estado=1 ORDER BY a.iddistrito desc;`
       )
       .then(res => {
         const loadData = res.rows.length > 0 ? res.rows : [];

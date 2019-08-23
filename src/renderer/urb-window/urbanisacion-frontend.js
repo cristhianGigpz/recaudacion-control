@@ -99,11 +99,11 @@ const cancelUpdate=()=>{
  * @param {this} element 
  */
 const btnEditar = (element)=>{
-    const fullData = loadGetDataId('urbanisacion','idurb',element.id);
+    const fullData = loadGetDataId('urbanisacion','idurbanisacion',element.id);
     document.getElementById("btn-cancelar").classList.remove("u-none");
     fullData.then((items)=>{
         document.getElementById('btn-urb').innerText ="Actualizar";
-        document.getElementById('id').value = items[0].idurb;
+        document.getElementById('id').value = items[0].idurbanisacion;
         document.getElementById('selectDist').selectedIndex = items[0].iddistrito;
         document.getElementById('urb').value = items[0].nomurbanisacion;
         document.getElementById('abreviatura').value = items[0].abreviatura;
