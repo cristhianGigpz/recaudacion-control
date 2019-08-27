@@ -1,5 +1,5 @@
 import UI from "./main-window/ui";
-import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/connect"
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, disconnect } from "../bd/connect"
 const ui = new UI();
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -7,6 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
     openAdd();
     //LoadData();
     cancelButton();
+});
+
+window.addEventListener("beforeunload", function (event) {
+  disconnect();
 });
 
 const openAdd = () => {
@@ -19,6 +23,7 @@ const cancelButton = () => {
 
 const LoadData = () => {
     listGrilla();
+    //disconnect();
     //ui.closeFrom("cancel-button");
   };
   
@@ -31,6 +36,7 @@ const LoadData = () => {
     dep.then(e => {
       LoaderData(e);
     });
+    
   };
 
   const LoaderData = items => {

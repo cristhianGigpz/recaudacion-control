@@ -9,6 +9,10 @@ const connection = new Client({
   port: process.env.DB_PORT
 });
 
+async function disconnect(){
+  //const res = await client.query('SELECT NOW()')
+  await connection.end();
+}
 async function loadGetData(table) {
     // const connet = this.connection();
     connection.connect(err => {
@@ -21,7 +25,7 @@ async function loadGetData(table) {
         return loadData;
       })
       .catch(e => console.log(e));
-
+      //disconnect();
     return await listData;
   }
 
@@ -159,6 +163,7 @@ async function loadGetData(table) {
       createUpdateQuery,
       loadDataJoin,
       loadDataJoinDistrito,
-      loadDataJoinUbanisacion
+      loadDataJoinUbanisacion,
+      disconnect
   }
   

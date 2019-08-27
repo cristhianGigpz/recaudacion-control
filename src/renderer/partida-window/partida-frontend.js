@@ -1,6 +1,6 @@
 import { remote } from 'electron'
 import UI from "./main-window/ui";
-import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId } from "../bd/connect"
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, loadGetDataId, disconnect } from "../bd/connect"
 const ui = new UI();
 
 /************************************************************** */
@@ -13,9 +13,13 @@ window.addEventListener("DOMContentLoaded", () => {
   cancelUpdate()
 });
 
+window.addEventListener("beforeunload", function (event) {
+  disconnect();
+});
+
 const cancelButton = () => {
   ui.closeFrom("cancel-button");
-  //connection.end();
+  
 };
 
 const LoadData = () => {

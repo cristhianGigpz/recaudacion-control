@@ -1,5 +1,5 @@
 import UI from "./main-window/ui";
-import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery } from "../bd/connect"
+import { loadGetData, executeQuery, createInsertQuery, createUpdateQuery, disconnect } from "../bd/connect"
 const ui = new UI();
 /*
  * Carga todos los eventos al formulario
@@ -10,6 +10,10 @@ window.addEventListener("DOMContentLoaded", () => {
   register();
   ui.pasarFocus("form-contribuyente");
   cancelUpdate();
+});
+
+window.addEventListener("beforeunload", function (event) {
+  disconnect();
 });
 
 const cancelButton = () => {
