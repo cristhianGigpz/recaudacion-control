@@ -72,7 +72,8 @@ const register = () => {
     let valuesForm = ui.valuesElements(form);
    ///alert(valuesForm);
     if (ui.validateForm(valuesForm)) {
-      //alert('process !!')
+      //alert(valuesForm)
+      //return false;
       let data = {
         codigo_presupuestal: valuesForm[0],
         concepto: valuesForm[1].toUpperCase(),

@@ -97,24 +97,28 @@ class UI {
     for (let i = 0; i < elements.length; i++) {
       let elemento = elements[i];
       //if(elemento.type != radio && (elemento.value === 0 || elemento.value ==='')){
-      if (
-        elemento.type == "text" ||
-        (elemento.type == "radio" && elemento.checked)
-      ) {
-        datos.push(elemento.value);
-      }
-      if (elemento.type == "checkbox") {
-        let valor = elemento.checked ? 1 : 0;
-        datos.push(valor);
-      }
-      if (
-        elemento.type != "hidden" &&
-        elemento.type != "text" &&
-        elemento.type != "radio" &&
-        elemento.type != "checkbox"
-      ) {
-        datos.push(elemento.value);
-      }
+      //if(elemento.dataset.validate){
+        if (
+          elemento.type == "text" ||
+          (elemento.type == "radio" && elemento.checked)
+        ) {
+          datos.push(elemento.value);
+        }
+        if (elemento.type == "checkbox") {
+          let valor = elemento.checked ? 1 : 0;
+          datos.push(valor);
+        }
+        if (
+          elemento.type != "hidden" &&
+          elemento.type != "text" &&
+          elemento.type != "radio" &&
+          elemento.type != "checkbox"
+        ) {
+          datos.push(elemento.value);
+        }
+
+      //}
+
     }
     return datos;
   }
